@@ -1,0 +1,52 @@
+{
+  "name": "parse-server-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyawswarthwin/parse-server-boilerplate.git"
+  },
+  "keywords": [
+    "parse-server"
+  ],
+  "author": "Kyaw Swar Thwin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kyawswarthwin/parse-server-boilerplate/issues"
+  },
+  "homepage": "https://github.com/kyawswarthwin/parse-server-boilerplate#readme",
+  "dependencies": {
+    "chokidar": "^2.0.3",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "easy-aapt": "^1.1.1",
+    "easy-metadata": "^1.0.2",
+    "express": "^4.16.3",
+    "parse-server": "^2.7.4",
+    "response-time": "^2.3.2",
+    "url-join": "^4.0.0"
+  },
+  "bin": "app.js",
+  "pkg": {
+    "scripts": [
+      "database/schemas/**/*.js",
+      "app/models/**/*.js",
+      "cloud/functions/**/*.js",
+      "cloud/jobs/**/*.js",
+      "database/triggers/**/*.js"
+    ],
+    "assets": [
+      "public/**/*"
+    ],
+    "targets": [
+      "node8-win-x86",
+      "node8-win-x64"
+    ]
+  }
+}
