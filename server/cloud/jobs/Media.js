@@ -1,5 +1,6 @@
 'use strict';
 
+const os = require('os');
 const path = require('path');
 const chokidar = require('chokidar');
 const metadata = require('easy-metadata');
@@ -10,7 +11,7 @@ const Music = require('../../app/models/Music');
 const Application = require('../../app/models/Application');
 const Game = require('../../app/models/Game');
 
-const mediaDir = process.env.MEDIA_DIR || path.join(process.cwd(), '..', '..', 'media');
+const mediaDir = process.env.MEDIA_DIR || path.join(process.cwd(), 'media');
 const Media = {
   Movie: ['.mp4'],
   Music: ['.mp3'],

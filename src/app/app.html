@@ -1,1 +1,21 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-split-pane>
+  <ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Yote Than</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list no-lines *ngFor="let menu of menus">
+        <ion-list-header *ngIf="menu.header">{{ menu.header }}</ion-list-header>
+        <button ion-item detail-none [ngClass]="{'menu-activated': isActive(page)}" *ngFor="let page of menu.pages" menuClose (click)="openPage(page)">
+          <ion-icon *ngIf="page.icon" [name]="page.icon" item-start></ion-icon>
+          <span ion-text>{{ page.title }}</span>
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>
