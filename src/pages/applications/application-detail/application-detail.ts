@@ -4,8 +4,8 @@ import { IonicPage } from 'ionic-angular';
 
 import 'rxjs/add/operator/first';
 
-import { BasePage } from '../base/base';
-import { ApplicationProvider as Application } from '../../providers/application/application';
+import { BasePage } from '../../base/base';
+import { ApplicationProvider as Application } from '../../../providers/application/application';
 
 @IonicPage({
   name: 'ApplicationDetailPage',
