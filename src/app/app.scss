@@ -1,7 +1,26 @@
+@mixin headings($from: 1, $to: 6) {
+  @for $i from $from through $to {
+    h#{$i} {
+      @content;
+    }
+  }
+}
+
 .menu-activated {
   @extend .activated;
   ion-icon,
   span {
     color: color($colors, primary);
+  }
+}
+
+.card-ios,
+.card-md,
+.card-wp {
+  @include headings() {
+    color: unset;
+  }
+  p {
+    color: #666;
   }
 }
