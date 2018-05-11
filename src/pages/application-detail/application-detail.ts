@@ -18,7 +18,7 @@ import { ApplicationProvider as Application } from '../../providers/application/
 })
 export class ApplicationDetailPage extends BasePage {
   application: Application;
-  review: string;
+  review: string = '';
 
   constructor(public injector: Injector, public http: HttpClient) {
     super(injector);
@@ -31,12 +31,14 @@ export class ApplicationDetailPage extends BasePage {
     try {
       this.showLoadingView('Loading...');
       await this.application.fetch();
-      this.review = await this.http
+      await this.http
         .get(this.getDownloadUrl('applications', `${this.application.file}.html`), {
           responseType: 'text'
         })
         .first()
-        .toPromise();
+        .toPromise()
+        .then(data => (this.review = data))
+        .catch(console.error);
       this.showContentView();
     } catch (error) {
       if (error.code === 101) {
