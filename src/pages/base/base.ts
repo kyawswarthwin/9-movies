@@ -8,6 +8,8 @@ import {
   AlertController
 } from 'ionic-angular';
 
+import { PARSE_SERVER } from '../../app/app.config';
+
 export abstract class BasePage {
   public isLoadingView: boolean;
   public isEmptyView: boolean;
@@ -165,5 +167,9 @@ export abstract class BasePage {
 
   closeModal(data?: any) {
     this.viewCtrl.dismiss(data);
+  }
+
+  getDownloadUrl(type: string, file: string) {
+    return new URL(`/media/${type}/${file}`, PARSE_SERVER.URL).href;
   }
 }

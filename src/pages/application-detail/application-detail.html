@@ -7,4 +7,19 @@
 <ion-content>
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Application."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="Application Not Found."></message-view>
+  <ion-card>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img [src]="application.icon ? application.icon.url() : 'assets/imgs/thumbnail.png'">
+      </ion-thumbnail>
+      <h2>{{ application.name }}</h2>
+      <p>Version: {{ application.versionName }}</p>
+    </ion-item>
+    <ion-item>
+      <a ion-button clear icon-left item-end [href]="getDownloadUrl('applications', application.file)" target="_blank">
+        <ion-icon name="download"></ion-icon>
+        Download
+      </a>
+    </ion-item>
+  </ion-card>
 </ion-content>

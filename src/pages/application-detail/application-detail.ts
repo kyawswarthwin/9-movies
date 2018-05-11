@@ -6,7 +6,7 @@ import { ApplicationProvider as Application } from '../../providers/application/
 
 @IonicPage({
   name: 'ApplicationDetailPage',
-  segment: 'applications/:id/detail',
+  segment: 'applications/:id',
   defaultHistory: ['ApplicationsPage']
 })
 @Component({

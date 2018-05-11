@@ -82,7 +82,7 @@ export class MyApp {
   isActive(page: PageInterface): boolean {
     return (
       this.nav.getActive() &&
-      this.nav.getActive().name ===
+      this.nav.getActive()._nav['root'] ===
         (typeof page.component === 'string' ? page.component : page.component.name)
     );
   }
