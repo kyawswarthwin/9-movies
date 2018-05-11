@@ -1,4 +1,6 @@
 import { Component, Injector } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/first';
 import { IonicPage } from 'ionic-angular';
 
 import { BasePage } from '../base/base';
@@ -15,8 +17,9 @@ import { ApplicationProvider as Application } from '../../providers/application/
 })
 export class ApplicationDetailPage extends BasePage {
   application: Application;
+  review: string;
 
-  constructor(public injector: Injector) {
+  constructor(public injector: Injector, public http: HttpClient) {
     super(injector);
 
     this.application = new Application();
@@ -27,6 +30,12 @@ export class ApplicationDetailPage extends BasePage {
     try {
       this.showLoadingView('Loading...');
       await this.application.fetch();
+      this.review = await this.http
+        .get(this.getDownloadUrl('applications', `${this.application.file}.html`), {
+          responseType: 'text'
+        })
+        .first()
+        .toPromise();
       this.showContentView();
     } catch (error) {
       if (error.code === 101) {

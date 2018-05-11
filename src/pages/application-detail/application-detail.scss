@@ -1,7 +1,19 @@
 page-application-detail {
-  .card-ios h2,
-  .card-md h2,
-  .card-wp h2 {
-    color: #fff;
+  @mixin headings($from: 1, $to: 6) {
+    @for $i from $from through $to {
+      h#{$i} {
+        @content;
+      }
+    }
+  }
+  .card-ios,
+  .card-md,
+  .card-wp {
+    @include headings() {
+      color: unset;
+    }
+    p {
+      color: #666;
+    }
   }
 }
