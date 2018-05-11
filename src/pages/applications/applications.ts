@@ -4,7 +4,9 @@ import { IonicPage } from 'ionic-angular';
 import { BasePage } from '../base/base';
 import { ApplicationProvider as Application } from '../../providers/application/application';
 
-@IonicPage()
+@IonicPage({
+  segment: 'applications'
+})
 @Component({
   selector: 'page-applications',
   templateUrl: 'applications.html'

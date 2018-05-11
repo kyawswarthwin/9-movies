@@ -8,7 +8,6 @@ import { BasePage } from '../../base/base';
 import { ApplicationProvider as Application } from '../../../providers/application/application';
 
 @IonicPage({
-  name: 'ApplicationDetailPage',
   segment: 'applications/:id',
   defaultHistory: ['ApplicationsPage']
 })
