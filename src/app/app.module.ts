@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
 import { ApplicationProvider } from '../providers/application/application';
+import { GameProvider } from '../providers/game/game';
 
 @NgModule({
   declarations: [MyApp],
@@ -25,7 +26,8 @@ import { ApplicationProvider } from '../providers/application/application';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     StatusBar,
     SplashScreen,
-    ApplicationProvider
+    ApplicationProvider,
+    GameProvider
   ]
 })
 export class AppModule {}
