@@ -3,4 +3,4 @@ export const PARSE_SERVER = {
   URL: 'http://localhost:1337/parse'
 };
 
-export const HOME_PAGE: string = 'ApplicationsPage';
+export const HOME_PAGE: any = 'ApplicationsPage';

@@ -1,7 +1,8 @@
 import { Component, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/first';
 import { IonicPage } from 'ionic-angular';
+
+import 'rxjs/add/operator/first';
 
 import { BasePage } from '../base/base';
 import { ApplicationProvider as Application } from '../../providers/application/application';
