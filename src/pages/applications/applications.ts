@@ -59,7 +59,7 @@ export class ApplicationsPage extends BasePage {
   onReload(refresher?: any) {
     this.refresher = refresher;
 
-    this.params.sortBy = this.direction + this.column;
+    this.params.sortBy = `${this.direction}${this.column}`;
     this.params.page = 0;
     this.applications = [];
 
