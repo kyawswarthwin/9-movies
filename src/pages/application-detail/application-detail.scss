@@ -1,3 +1,6 @@
 page-application-detail {
-
+  ion-card-header,
+  ion-card-content {
+    border-bottom: 0.55px solid #191919 !important;
+  }
 }
