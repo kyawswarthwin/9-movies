@@ -32,7 +32,7 @@ export class ApplicationDetailPage extends BasePage {
       this.showLoadingView('Loading...');
       await this.application.fetch();
       await this.http
-        .get(this.getDownloadUrl('applications', `${this.application.file}.html`), {
+        .get(this.getDownloadUrl('applications', `${this.application.file.split('.')[0]}.html`), {
           responseType: 'text'
         })
         .first()
