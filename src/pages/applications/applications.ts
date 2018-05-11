@@ -24,21 +24,20 @@ export class ApplicationsPage extends BasePage {
     this.onReload();
   }
 
-  loadData() {
-    Application.load(this.params)
-      .then(data => {
-        this.applications = this.applications.concat(data);
-        this.onRefreshComplete(data);
-        if (this.applications.length) {
-          this.showContentView();
-        } else {
-          this.showEmptyView();
-        }
-      })
-      .catch(error => {
-        this.onRefreshComplete();
-        this.showErrorView();
-      });
+  async loadData() {
+    try {
+      let data = await Application.load(this.params);
+      this.applications = this.applications.concat(data);
+      this.onRefreshComplete(data);
+      if (this.applications.length) {
+        this.showContentView();
+      } else {
+        this.showEmptyView();
+      }
+    } catch (error) {
+      this.onRefreshComplete();
+      this.showErrorView();
+    }
   }
 
   onSearch() {

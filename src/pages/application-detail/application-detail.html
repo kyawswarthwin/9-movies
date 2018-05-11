@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ application.name ? application.name : 'Error' }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Application."></message-view>
+  <message-view *ngIf="isEmptyView" icon="bookmark" message="Application Not Found."></message-view>
+</ion-content>

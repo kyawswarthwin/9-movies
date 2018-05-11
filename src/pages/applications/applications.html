@@ -30,7 +30,7 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Applications."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Applications Found."></message-view>
   <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let application of applications">
+    <button ion-item *ngFor="let application of applications" navPush="ApplicationDetailPage" [navParams]="application">
       <ion-thumbnail item-start>
         <img [src]="application.icon ? application.icon.url() : 'assets/imgs/thumbnail.png'">
       </ion-thumbnail>
