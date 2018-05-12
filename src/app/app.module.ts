@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
+
 import { ApplicationProvider } from '../providers/application/application';
 import { GameProvider } from '../providers/game/game';
 
