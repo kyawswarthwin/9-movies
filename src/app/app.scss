@@ -10,7 +10,7 @@
   @extend .activated;
   ion-icon,
   span {
-    color: color($colors, danger);
+    color: color($colors, primary);
   }
 }
 
