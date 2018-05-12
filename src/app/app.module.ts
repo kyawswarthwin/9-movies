@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 
 import { ApplicationProvider } from '../providers/application/application';
 import { GameProvider } from '../providers/game/game';
+import { ChannelProvider } from '../providers/channel/channel';
 
 @NgModule({
   declarations: [MyApp],
@@ -28,7 +29,8 @@ import { GameProvider } from '../providers/game/game';
     StatusBar,
     SplashScreen,
     ApplicationProvider,
-    GameProvider
+    GameProvider,
+    ChannelProvider
   ]
 })
 export class AppModule {}

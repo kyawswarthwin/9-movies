@@ -39,7 +39,7 @@ export class MyApp {
         },
         {
           title: 'TV Channels',
-          component: 'TvChannelsPage'
+          component: 'ChannelsPage'
         },
         {
           title: 'Radio Stations',

@@ -1,0 +1,11 @@
+page-tv-player {
+  .plyr {
+    height: 100%;
+    .plyr__video-wrapper {
+      height: 100%;
+      video {
+        height: 100%;
+      }
+    }
+  }
+}
