@@ -33,7 +33,7 @@ export class TvPlayerPage extends BasePage {
       this.showLoadingView('Loading...');
       await this.channel.fetch();
       this.showContentView();
-      this.player = this.loadPlayer(this.channel.url);
+      this.player = this.loadVideo(this.channel.url);
       this.player.on('enterfullscreen', event => {
         this.menuCtrl.enable(false);
       });
@@ -50,7 +50,7 @@ export class TvPlayerPage extends BasePage {
     }
   }
 
-  loadPlayer(url: string) {
+  loadVideo(url: string) {
     const video = this.video.nativeElement as HTMLVideoElement;
     if (Hls.isSupported()) {
       const hls = new Hls();
