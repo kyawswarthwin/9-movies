@@ -6,6 +6,10 @@
   }
 }
 
+ion-split-pane {
+  height: 100%;
+}
+
 .menu-activated {
   @extend .activated;
   ion-icon,

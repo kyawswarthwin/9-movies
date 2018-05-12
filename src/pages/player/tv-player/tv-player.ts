@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, MenuController } from 'ionic-angular';
 
 import Plyr from 'plyr';
 import Hls from 'hls.js';
@@ -21,7 +21,7 @@ export class TvPlayerPage extends BasePage {
   channel: Channel;
   player: any;
 
-  constructor(public injector: Injector) {
+  constructor(public injector: Injector, public menuCtrl: MenuController) {
     super(injector);
 
     this.channel = new Channel();
@@ -34,6 +34,12 @@ export class TvPlayerPage extends BasePage {
       await this.channel.fetch();
       this.showContentView();
       this.player = this.loadPlayer(this.channel.url);
+      this.player.on('enterfullscreen', event => {
+        this.menuCtrl.enable(false);
+      });
+      this.player.on('exitfullscreen', event => {
+        this.menuCtrl.enable(true);
+      });
       this.player.play();
     } catch (error) {
       if (error.code === 101) {
