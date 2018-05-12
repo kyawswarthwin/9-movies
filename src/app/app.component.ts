@@ -81,8 +81,8 @@ export class MyApp {
 
   isActive(page: PageInterface): boolean {
     return (
-      this.nav._views[0] &&
-      this.nav._views[0].name ===
+      this.nav.first() &&
+      this.nav.first().name ===
         (typeof page.component === 'string' ? page.component : page.component.name)
     );
   }
