@@ -1,9 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ channel.name }}</ion-title>
+    <ion-title>{{ channel.name ? channel.name : 'Error' }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <video controls crossorigin preload="none" #video></video>
+  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Channel."></message-view>
+  <message-view *ngIf="isEmptyView" icon="bookmark" message="Channel Not Found."></message-view>
+  <video [hidden]="!isContentView" controls crossorigin preload="none" #video></video>
 </ion-content>

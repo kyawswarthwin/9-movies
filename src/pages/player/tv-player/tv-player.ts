@@ -32,9 +32,9 @@ export class TvPlayerPage extends BasePage {
     try {
       this.showLoadingView('Loading...');
       await this.channel.fetch();
-      this.player = this.load(this.channel.url);
-      this.player.play();
       this.showContentView();
+      this.player = this.loadPlayer(this.channel.url);
+      this.player.play();
     } catch (error) {
       if (error.code === 101) {
         this.showEmptyView();
@@ -44,7 +44,7 @@ export class TvPlayerPage extends BasePage {
     }
   }
 
-  load(url: string) {
+  loadPlayer(url: string) {
     const video = this.video.nativeElement as HTMLVideoElement;
     if (Hls.isSupported()) {
       const hls = new Hls();

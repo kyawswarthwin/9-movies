@@ -36,7 +36,7 @@ export abstract class BasePage {
     this.alertCtrl = injector.get(AlertController);
   }
 
-  showLoadingView(message?: string) {
+  showLoadingView(message?: string): Promise<void> {
     this.isLoadingView = true;
     this.isEmptyView = false;
     this.isContentView = false;
@@ -45,7 +45,7 @@ export abstract class BasePage {
     this.loading = this.loadingCtrl.create({
       content: message
     });
-    this.loading.present();
+    return this.loading.present();
   }
 
   showEmptyView() {
@@ -92,7 +92,7 @@ export abstract class BasePage {
 
   showAlert(message: string, title?: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      let alert = this.alertCtrl.create({
+      const alert = this.alertCtrl.create({
         title: title,
         message: message,
         buttons: [
@@ -108,7 +108,7 @@ export abstract class BasePage {
 
   showPrompt(message: string, inputs: any[], title?: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      let alert = this.alertCtrl.create({
+      const alert = this.alertCtrl.create({
         title: title,
         message: message,
         inputs: inputs,
@@ -134,7 +134,7 @@ export abstract class BasePage {
 
   showConfirm(message: string, title?: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      let alert = this.alertCtrl.create({
+      const alert = this.alertCtrl.create({
         title: title,
         message: message,
         buttons: [
@@ -159,7 +159,7 @@ export abstract class BasePage {
 
   showModal(component: any, data?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      let modal = this.modalCtrl.create(component, data);
+      const modal = this.modalCtrl.create(component, data);
       modal.onDidDismiss(resolve);
       modal.present();
     });

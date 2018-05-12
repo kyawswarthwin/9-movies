@@ -7,7 +7,7 @@
 <ion-content>
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Game."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="Game Not Found."></message-view>
-  <ion-card>
+  <ion-card *ngIf="isContentView">
     <ion-card-header ion-item>
       <ion-thumbnail item-start>
         <img [src]="game.icon ? game.icon.url() : 'assets/imgs/thumbnail.png'">
