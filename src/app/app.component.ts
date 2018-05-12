@@ -30,8 +30,8 @@ export class MyApp {
           component: 'MoviesPage'
         },
         {
-          title: 'TV Shows',
-          component: 'TvShowsPage'
+          title: 'TV Series',
+          component: 'TvSeriesPage'
         },
         {
           title: 'Music',
