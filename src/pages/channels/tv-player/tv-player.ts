@@ -57,6 +57,6 @@ export class TvPlayerPage extends BasePage {
       hls.loadSource(url);
       hls.attachMedia(video);
     }
-    return new Plyr(video);
+    return new Plyr(video, { iconUrl: 'assets/imgs/plyr.svg' });
   }
 }
