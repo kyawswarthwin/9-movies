@@ -43,7 +43,7 @@ export class MyApp {
         },
         {
           title: 'Radio Stations',
-          component: 'RadioStationsPage'
+          component: 'StationsPage'
         },
         {
           title: 'Applications',

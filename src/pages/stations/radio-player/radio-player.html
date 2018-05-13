@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ station.name ? station.name : 'Error' }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Station."></message-view>
+  <message-view *ngIf="isEmptyView" icon="bookmark" message="Station Not Found."></message-view>
+  <ion-grid>
+    <ion-row justify-content-center align-items-center>
+      <ion-col text-center>
+        <ion-icon name="radio"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer [hidden]="!isContentView">
+  <audio controls crossorigin preload="none" #audio></audio>
+</ion-footer>
