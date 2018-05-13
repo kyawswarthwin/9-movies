@@ -22,8 +22,12 @@ module.exports = {
     src: ['{{ROOT}}/node_modules/sw-toolbox/sw-toolbox.js'],
     dest: '{{BUILD}}'
   },
-  copyPlyr: {
+  copyPlyrIcon: {
     src: ['{{ROOT}}/node_modules/plyr/dist/plyr.svg'],
     dest: '{{WWW}}/assets/imgs'
+  },
+  copyPlyrBlankVideo: {
+    src: ['{{ROOT}}/node_modules/plyr/dist/blank.mp4'],
+    dest: '{{WWW}}/assets/misc'
   },
 }
