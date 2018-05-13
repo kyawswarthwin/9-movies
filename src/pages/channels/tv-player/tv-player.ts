@@ -19,6 +19,7 @@ export class TvPlayerPage extends BasePage {
   @ViewChild('video') video: ElementRef;
 
   channel: Channel;
+  hls: any;
   player: any;
 
   constructor(public injector: Injector, public menuCtrl: MenuController) {
@@ -50,12 +51,16 @@ export class TvPlayerPage extends BasePage {
     }
   }
 
+  ionViewWillLeave() {
+    this.hls.detachMedia();
+  }
+
   loadVideo(url: string) {
     const video = this.video.nativeElement as HTMLVideoElement;
     if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(video);
+      this.hls = new Hls();
+      this.hls.loadSource(url);
+      this.hls.attachMedia(video);
     }
     return new Plyr(video, {
       iconUrl: 'assets/imgs/plyr.svg',
