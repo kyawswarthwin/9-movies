@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ params.title ? params.title : 'Songs' }}</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-searchbar [(ngModel)]="params.search" (keyup.enter)="onSearch()" (ionClear)="onClearSearch()"></ion-searchbar>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item>
+      <ion-label>Sort By</ion-label>
+      <ion-select [(ngModel)]="column" (ionChange)="onReload()">
+        <ion-option value="title">Title</ion-option>
+        <ion-option value="year">Year</ion-option>
+        <ion-option value="track">Track</ion-option>
+        <ion-option value="updatedAt">Date Modified</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="direction" (ionChange)="onReload()">
+        <ion-option value="">Ascending</ion-option>
+        <ion-option value="-">Descending</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="onReload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Songs."></message-view>
+  <message-view *ngIf="isEmptyView" icon="bookmark" message="No Songs Found."></message-view>
+  <ion-list *ngIf="isContentView">
+    <button ion-item *ngFor="let song of songs; let i = index" navPush="SongDetailPage" [navParams]="params.by === 'album' ? { tracks: songs, currentTrack: i } : song">
+      <ion-thumbnail *ngIf="params.by !== 'album'" item-start>
+        <img [src]="song.picture ? song.picture.url() : 'assets/imgs/thumbnail.png'">
+      </ion-thumbnail>
+      <h2>{{ song.title }}</h2>
+      <p *ngIf="params.by !== 'artist'">{{ song.artist }}</p>
+      <p *ngIf="params.by !== 'album'">{{ song.album }}</p>
+      <h2 *ngIf="params.by === 'album'" item-end>{{ song.track }}</h2>
+    </button>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="isContentView" (ionInfinite)="onLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

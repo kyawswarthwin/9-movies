@@ -11,6 +11,7 @@ import { ApplicationProvider } from '../providers/application/application';
 import { GameProvider } from '../providers/game/game';
 import { ChannelProvider } from '../providers/channel/channel';
 import { StationProvider } from '../providers/station/station';
+import { MusicProvider } from '../providers/music/music';
 
 @NgModule({
   declarations: [MyApp],
@@ -32,7 +33,8 @@ import { StationProvider } from '../providers/station/station';
     ApplicationProvider,
     GameProvider,
     ChannelProvider,
-    StationProvider
+    StationProvider,
+    MusicProvider
   ]
 })
 export class AppModule {}
