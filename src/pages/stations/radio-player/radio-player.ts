@@ -52,7 +52,7 @@ export class RadioPlayerPage extends BasePage {
   }
 
   ionViewWillLeave() {
-    this.hls.detachMedia();
+    if (this.hls) this.hls.detachMedia();
   }
 
   loadAudio(url: string) {

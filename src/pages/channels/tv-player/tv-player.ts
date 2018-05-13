@@ -52,7 +52,7 @@ export class TvPlayerPage extends BasePage {
   }
 
   ionViewWillLeave() {
-    this.hls.detachMedia();
+    if (this.hls) this.hls.detachMedia();
   }
 
   loadVideo(url: string) {
