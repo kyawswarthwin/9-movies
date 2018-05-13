@@ -7,7 +7,7 @@
 <ion-content>
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Station."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="Station Not Found."></message-view>
-  <ion-grid>
+  <ion-grid [hidden]="!isContentView">
     <ion-row justify-content-center align-items-center>
       <ion-col text-center>
         <ion-icon name="radio"></ion-icon>
