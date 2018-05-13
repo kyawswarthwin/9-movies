@@ -64,7 +64,23 @@ export class TvPlayerPage extends BasePage {
     }
     return new Plyr(video, {
       iconUrl: 'assets/imgs/plyr.svg',
-      blankVideo: 'assets/misc/blank.mp4'
+      blankVideo: 'assets/misc/blank.mp4',
+      controls: [
+        'play-large',
+        // 'restart',
+        // 'rewind',
+        'play',
+        // 'fast-forward',
+        'progress',
+        'current-time',
+        'mute',
+        'volume',
+        'captions',
+        // 'settings',
+        'pip',
+        'airplay',
+        'fullscreen'
+      ]
     });
   }
 }
