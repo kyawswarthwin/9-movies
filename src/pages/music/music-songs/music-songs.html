@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ params.title ? params.title : 'Songs' }}</ion-title>
+    <ion-title>{{ params.value ? params.value : 'Songs' }}</ion-title>
   </ion-navbar>
   <ion-toolbar no-border-top>
     <ion-searchbar [(ngModel)]="params.search" (keyup.enter)="onSearch()" (ionClear)="onClearSearch()"></ion-searchbar>
@@ -32,14 +32,14 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Songs."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Songs Found."></message-view>
   <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let song of songs; let i = index" navPush="SongDetailPage" [navParams]="params.by === 'album' ? { tracks: songs, currentTrack: i } : song">
-      <ion-thumbnail *ngIf="params.by !== 'album'" item-start>
+    <button ion-item *ngFor="let song of songs; let i = index" navPush="SongDetailPage" [navParams]="params.field === 'album' ? { tracks: songs, currentTrack: i } : song">
+      <ion-thumbnail *ngIf="params.field !== 'album'" item-start>
         <img [src]="song.picture ? song.picture.url() : 'assets/imgs/thumbnail.png'">
       </ion-thumbnail>
       <h2>{{ song.title }}</h2>
-      <p *ngIf="params.by !== 'artist'">{{ song.artist }}</p>
-      <p *ngIf="params.by !== 'album'">{{ song.album }}</p>
-      <h2 *ngIf="params.by === 'album'" item-end>{{ song.track }}</h2>
+      <p *ngIf="params.field !== 'artist'">{{ song.artist }}</p>
+      <p *ngIf="params.field !== 'album'">{{ song.album }}</p>
+      <h2 *ngIf="params.field === 'album'" item-end>{{ song.track }}</h2>
     </button>
   </ion-list>
   <ion-infinite-scroll *ngIf="isContentView" (ionInfinite)="onLoadMore($event)">

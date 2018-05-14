@@ -12,10 +12,9 @@ export class MusicProvider extends Parse.Object {
     return new Promise((resolve, reject) => {
       let query = new Parse.Query(this);
       if (params) {
-        //By
-        if (params.by) {
-          query.equalTo(params.by, params.name);
-          fields = fields.filter(data => data !== params.by);
+        if (params.field) {
+          query.equalTo(params.field, params.value);
+          fields = fields.filter(data => data !== params.field);
         }
         //Search
         if (params.search) {
@@ -45,6 +44,14 @@ export class MusicProvider extends Parse.Object {
       }
       query
         .find()
+        .then(resolve)
+        .catch(reject);
+    });
+  }
+
+  static listOf(params?: any): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      Parse.Cloud.run('musicListOf', params)
         .then(resolve)
         .catch(reject);
     });
