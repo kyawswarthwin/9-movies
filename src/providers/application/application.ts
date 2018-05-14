@@ -8,16 +8,16 @@ export class ApplicationProvider extends Parse.Object {
     super('Application');
   }
 
-  static load(params?: any, keys: any = ['name', 'packageName']): Promise<ApplicationProvider[]> {
+  static load(params?: any, fields: any = ['name', 'packageName']): Promise<ApplicationProvider[]> {
     return new Promise((resolve, reject) => {
       let query = new Parse.Query(this);
       if (params) {
         //Search
         if (params.search) {
           let queries = [];
-          keys.forEach((key, index) => {
+          fields.forEach((field, index) => {
             queries[index] = new Parse.Query(this);
-            queries[index].contains(key, params.search);
+            queries[index].contains(field, params.search);
           });
           query = Parse.Query.or(...queries);
         }
@@ -38,7 +38,10 @@ export class ApplicationProvider extends Parse.Object {
           query.skip(params.page * limit);
         }
       }
-      query.find().then(resolve, reject);
+      query
+        .find()
+        .then(resolve)
+        .catch(reject);
     });
   }
 

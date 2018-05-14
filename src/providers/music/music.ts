@@ -8,21 +8,21 @@ export class MusicProvider extends Parse.Object {
     super('Music');
   }
 
-  static load(params?: any, keys: any = ['title', 'artist', 'album']): Promise<MusicProvider[]> {
+  static load(params?: any, fields: any = ['title', 'artist', 'album']): Promise<MusicProvider[]> {
     return new Promise((resolve, reject) => {
       let query = new Parse.Query(this);
       if (params) {
         //By
         if (params.by) {
           query.equalTo(params.by, params.name);
-          keys = keys.filter(data => data !== params.by);
+          fields = fields.filter(data => data !== params.by);
         }
         //Search
         if (params.search) {
           let queries = [];
-          keys.forEach((key, index) => {
+          fields.forEach((field, index) => {
             queries[index] = new Parse.Query(this);
-            queries[index].contains(key, params.search);
+            queries[index].contains(field, params.search);
           });
           query = Parse.Query.or(...queries);
         }
@@ -43,7 +43,10 @@ export class MusicProvider extends Parse.Object {
           query.skip(params.page * limit);
         }
       }
-      query.find().then(resolve, reject);
+      query
+        .find()
+        .then(resolve)
+        .catch(reject);
     });
   }
 
