@@ -12,7 +12,7 @@ export class StationProvider extends Parse.Object {
     return new Promise((resolve, reject) => {
       let query = new Parse.Query(this);
       if (params) {
-        //Search
+        // Search
         if (params.search) {
           let queries = [];
           fields.forEach((field, index) => {
@@ -21,7 +21,7 @@ export class StationProvider extends Parse.Object {
           });
           query = Parse.Query.or(...queries);
         }
-        //Sort
+        // Sort
         if (params.sortBy) {
           let sortBy = params.sortBy;
           if (sortBy.charAt(0) === '-') {
@@ -31,7 +31,7 @@ export class StationProvider extends Parse.Object {
             query.ascending(sortBy);
           }
         }
-        //Paginate
+        // Paginate
         if (params.page >= 0) {
           let limit = params.limit || 15;
           query.limit(limit);

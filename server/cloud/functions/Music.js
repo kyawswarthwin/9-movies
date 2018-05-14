@@ -6,13 +6,13 @@ function musicListOf(request, response) {
   let query = new Parse.Query(Music);
   let pipeline = [{}];
   let direction = 1;
-  //Search
+  // Search
   if (request.params.search) {
     pipeline[0]['match'] = {
-      [`${request.params.field}`]: request.params.search
+      [`${request.params.field}`]: { $regex: request.params.search }
     };
   }
-  //Sort
+  // Sort
   if (request.params.sortBy) {
     let sortBy = request.params.sortBy;
     if (sortBy.charAt(0) === '-') {
@@ -23,7 +23,7 @@ function musicListOf(request, response) {
       [`${sortBy}`]: direction
     };
   }
-  //Paginate
+  // Paginate
   if (request.params.page >= 0) {
     let limit = request.params.limit || 15;
     pipeline[0]['limit'] = limit;
