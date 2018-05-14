@@ -14,7 +14,7 @@ import { MusicProvider as Music } from '../../../providers/music/music';
 export class MusicArtistsPage extends BasePage {
   params: any = { field: 'artist' };
   artists: any[];
-  column: string = 'name';
+  column: string = 'artist';
   direction: string = '';
 
   constructor(public injector: Injector) {
