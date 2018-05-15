@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
-@IonicPage()
+@IonicPage({
+  segment: 'music'
+})
 @Component({
   selector: 'page-music',
   templateUrl: 'music.html'
