@@ -17,22 +17,22 @@ import { MusicProvider as Music } from '../../../providers/music/music';
 export class MusicPlayerPage extends BasePage {
   @ViewChild('audio') audio: ElementRef;
 
-  music: Music;
+  song: Music;
   player: any;
 
   constructor(public injector: Injector) {
     super(injector);
 
-    this.music = new Music();
-    this.music.id = this.navParams.data.id;
+    this.song = new Music();
+    this.song.id = this.navParams.data.id;
   }
 
   async ionViewDidLoad() {
     try {
       this.showLoadingView('Loading...');
-      await this.music.fetch();
+      await this.song.fetch();
       this.showContentView();
-      this.player = this.loadAudio(this.getDownloadUrl('music', this.music.file));
+      this.player = this.loadAudio(this.getDownloadUrl('music', this.song.file));
       this.player.play();
     } catch (error) {
       if (error.code === 101) {

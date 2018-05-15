@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ music.title && music.album ? music.title + ' - ' + music.album : 'Error' }}</ion-title>
+    <ion-title>{{ song.title && song.album ? song.title + ' - ' + song.album : 'Error' }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,7 +10,7 @@
   <ion-grid [hidden]="!isContentView">
     <ion-row justify-content-center align-items-center>
       <ion-col text-center>
-        <ion-icon name="radio"></ion-icon>
+        <img [src]="song.picture ? song.picture.url() : 'assets/imgs/thumbnail.png'">
       </ion-col>
     </ion-row>
   </ion-grid>
