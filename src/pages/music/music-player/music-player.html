@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ music.title ? music.title : 'Error' }}</ion-title>
+    <ion-title>{{ music.title && music.album ? music.title + ' - ' + music.album : 'Error' }}</ion-title>
   </ion-navbar>
 </ion-header>
 
