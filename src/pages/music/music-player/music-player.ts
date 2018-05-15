@@ -44,7 +44,7 @@ export class MusicPlayerPage extends BasePage {
         this.currentTrack = this.tracks.findIndex(data => data.id === this.song.id);
       }
       this.showContentView();
-      this.player = this.loadAudio(this.getDownloadUrl('music', this.song.file));
+      this.player = this.loadAudio(this.getMediaUrl('music', this.song.file));
       if (this.isAlbum) {
         this.player.on('ended', event => {
           this.next();
@@ -64,7 +64,7 @@ export class MusicPlayerPage extends BasePage {
     if (this.currentTrack > 0) {
       this.currentTrack--;
       this.song = this.tracks[this.currentTrack];
-      this.player.media.src = this.getDownloadUrl('music', this.song.file);
+      this.player.media.src = this.getMediaUrl('music', this.song.file);
       this.player.play();
     }
   }
@@ -73,7 +73,7 @@ export class MusicPlayerPage extends BasePage {
     if (this.tracks.length > this.currentTrack + 1) {
       this.currentTrack++;
       this.song = this.tracks[this.currentTrack];
-      this.player.media.src = this.getDownloadUrl('music', this.song.file);
+      this.player.media.src = this.getMediaUrl('music', this.song.file);
       this.player.play();
     }
   }

@@ -31,7 +31,7 @@ export class GameDetailPage extends BasePage {
       this.showLoadingView('Loading...');
       await this.game.fetch();
       await this.http
-        .get(this.getDownloadUrl('games', `${this.game.file.split('.')[0]}.html`), {
+        .get(this.getMediaUrl('games', `${this.game.file.split('.')[0]}.html`), {
           responseType: 'text'
         })
         .first()

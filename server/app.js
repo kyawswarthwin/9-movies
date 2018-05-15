@@ -73,10 +73,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mountPath, api);
 app.use('/media', express.static(mediaDir));
 
-app.get('/download', (req, res) => {
-  let { file } = req.query;
-  file = path.join(mediaDir, file);
-  res.download(file);
+app.get('/download', async (req, res) => {
+  try {
+    let { type, id } = req.query;
+    let Obj;
+    switch (type) {
+      case 'movies':
+        Obj = require('./app/models/Movie');
+        break;
+      case 'music':
+        Obj = require('./app/models/Music');
+        break;
+      case 'applications':
+        Obj = require('./app/models/Application');
+        break;
+      case 'games':
+        Obj = require('./app/models/Game');
+        break;
+      default:
+        break;
+    }
+    let obj = new Obj();
+    let query = new Parse.Query(obj);
+    query.equalTo('objectId', id);
+    let data = await query.first();
+    if (data) {
+      res.download(path.join(mediaDir, type, data.get('file')));
+    } else {
+      throw new Error();
+    }
+  } catch (error) {
+    res.status(404).json({
+      error: 'Not Found'
+    });
+  }
 });
 
 const server = http.createServer(app);

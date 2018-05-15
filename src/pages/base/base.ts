@@ -169,11 +169,11 @@ export abstract class BasePage {
     this.viewCtrl.dismiss(data);
   }
 
-  getDownloadUrl(type: string, file: string) {
+  getMediaUrl(type: string, file: string) {
     return new URL(`/media/${type}/${file}`, PARSE_SERVER.URL).href;
   }
 
-  download(type: string, file: string) {
-    return new URL(`/download?file=${type}/${file}`, PARSE_SERVER.URL).href;
+  download(type: string, id: string) {
+    return new URL(`/download?type=${type}&id=${id}`, PARSE_SERVER.URL).href;
   }
 }
