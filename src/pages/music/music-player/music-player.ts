@@ -61,6 +61,7 @@ export class MusicPlayerPage extends BasePage {
         if (this.tracks.length > this.currentTrack + 1) {
           this.currentTrack++;
           this.song = this.tracks[this.currentTrack];
+          this.player.media.src = this.getDownloadUrl('music', this.song.file);
           this.play();
         }
       });
