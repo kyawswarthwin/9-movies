@@ -45,7 +45,12 @@ export class MusicPlayerPage extends BasePage {
       }
       this.showContentView();
       this.player = this.loadAudio(this.getDownloadUrl('music', this.song.file));
-      this.play();
+      if (this.isAlbum) {
+        this.player.on('ended', event => {
+          this.next();
+        });
+      }
+      this.player.play();
     } catch (error) {
       if (error.code === 101) {
         this.showEmptyView();
@@ -55,42 +60,65 @@ export class MusicPlayerPage extends BasePage {
     }
   }
 
-  play() {
-    if (this.isAlbum) {
-      this.player.on('ended', event => {
-        if (this.tracks.length > this.currentTrack + 1) {
-          this.currentTrack++;
-          this.song = this.tracks[this.currentTrack];
-          this.player.media.src = this.getDownloadUrl('music', this.song.file);
-          this.play();
-        }
-      });
+  next() {
+    if (this.tracks.length > this.currentTrack + 1) {
+      this.currentTrack++;
+      this.song = this.tracks[this.currentTrack];
+      this.player.media.src = this.getDownloadUrl('music', this.song.file);
+      this.player.play();
     }
-    this.player.play();
   }
 
   loadAudio(url: string) {
     const audio = this.audio.nativeElement as HTMLAudioElement;
     audio.src = url;
-    return new Plyr(audio, {
-      iconUrl: 'assets/imgs/plyr.svg',
-      blankVideo: 'assets/misc/blank.mp4',
-      controls: [
-        'play-large',
-        // 'restart',
-        // 'rewind',
-        'play',
-        // 'fast-forward',
-        'progress',
-        'current-time',
-        'mute',
-        'volume',
-        'captions',
-        // 'settings',
-        'pip',
-        'airplay',
-        'fullscreen'
-      ]
-    });
+    if (this.isAlbum) {
+      return new Plyr(audio, {
+        iconUrl: 'assets/imgs/plyr.svg',
+        blankVideo: 'assets/misc/blank.mp4',
+        controls: [
+          'play-large',
+          // 'restart',
+          'rewind',
+          'play',
+          'fast-forward',
+          'progress',
+          'current-time',
+          'mute',
+          'volume',
+          'captions',
+          // 'settings',
+          'pip',
+          'airplay',
+          'fullscreen'
+        ],
+        listeners: {
+          fastForward: () => {
+            this.next();
+          }
+        }
+      });
+    } else {
+      return new Plyr(audio, {
+        iconUrl: 'assets/imgs/plyr.svg',
+        blankVideo: 'assets/misc/blank.mp4',
+        controls: [
+          'play-large',
+          // 'restart',
+          // 'rewind',
+          'play',
+          // 'fast-forward',
+          'progress',
+          'current-time',
+          'mute',
+          'volume',
+          'captions',
+          // 'settings',
+          'pip',
+          'airplay',
+          'fullscreen'
+        ]
+      });
+    }
   }
 }
