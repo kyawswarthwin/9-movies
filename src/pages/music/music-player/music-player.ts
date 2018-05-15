@@ -88,9 +88,9 @@ export class MusicPlayerPage extends BasePage {
         controls: [
           'play-large',
           // 'restart',
-          'rewind',
+          // 'rewind',
           'play',
-          'fast-forward',
+          // 'fast-forward',
           'progress',
           'current-time',
           'mute',
