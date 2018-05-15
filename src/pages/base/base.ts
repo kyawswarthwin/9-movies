@@ -172,4 +172,8 @@ export abstract class BasePage {
   getDownloadUrl(type: string, file: string) {
     return new URL(`/media/${type}/${file}`, PARSE_SERVER.URL).href;
   }
+
+  download(type: string, file: string) {
+    return new URL(`/download?file=${type}/${file}`, PARSE_SERVER.URL).href;
+  }
 }

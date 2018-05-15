@@ -64,12 +64,20 @@ const api = new ParseServer({
   allowClientClassCreation: process.env.NODE_ENV === 'production' ? false : true
 });
 
+const mediaDir = process.env.MEDIA_DIR || path.join(process.cwd(), 'media');
+
 app.use(responseTime());
 app.use(compression());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mountPath, api);
-app.use('/media', express.static(process.env.MEDIA_DIR || path.join(process.cwd(), 'media')));
+app.use('/media', express.static(mediaDir));
+
+app.get('/download', (req, res) => {
+  let { file } = req.query;
+  file = path.join(mediaDir, file);
+  res.download(file);
+});
 
 const server = http.createServer(app);
 server.listen(port, () => {

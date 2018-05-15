@@ -18,7 +18,7 @@
     <ion-card-content *ngIf="review" [innerHTML]="review | safe: 'html'">
     </ion-card-content>
     <ion-item>
-      <a ion-button clear icon-left item-end [href]="getDownloadUrl('games', game.file)" target="_blank">
+      <a ion-button clear icon-left item-end [href]="download('games', game.file)" target="_blank">
         <ion-icon name="download"></ion-icon>
         Download
       </a>
