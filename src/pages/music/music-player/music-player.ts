@@ -60,6 +60,15 @@ export class MusicPlayerPage extends BasePage {
     }
   }
 
+  prev() {
+    if (this.currentTrack > 0) {
+      this.currentTrack--;
+      this.song = this.tracks[this.currentTrack];
+      this.player.media.src = this.getDownloadUrl('music', this.song.file);
+      this.player.play();
+    }
+  }
+
   next() {
     if (this.tracks.length > this.currentTrack + 1) {
       this.currentTrack++;
@@ -93,6 +102,9 @@ export class MusicPlayerPage extends BasePage {
           'fullscreen'
         ],
         listeners: {
+          rewind: () => {
+            this.prev();
+          },
           fastForward: () => {
             this.next();
           }
