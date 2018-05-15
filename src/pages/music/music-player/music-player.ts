@@ -7,7 +7,7 @@ import { BasePage } from '../../base/base';
 import { MusicProvider as Music } from '../../../providers/music/music';
 
 @IonicPage({
-  segment: 'songs/:id',
+  segment: 'songs/:id/:isAlbum',
   defaultHistory: ['MusicPage']
 })
 @Component({
@@ -18,6 +18,9 @@ export class MusicPlayerPage extends BasePage {
   @ViewChild('audio') audio: ElementRef;
 
   song: Music;
+  isAlbum: boolean;
+  tracks: Music[];
+  currentTrack: number;
   player: any;
 
   constructor(public injector: Injector) {
@@ -25,15 +28,24 @@ export class MusicPlayerPage extends BasePage {
 
     this.song = new Music();
     this.song.id = this.navParams.data.id;
+    this.isAlbum = this.navParams.data.isAlbum;
   }
 
   async ionViewDidLoad() {
     try {
       this.showLoadingView('Loading...');
       await this.song.fetch();
+      if (this.isAlbum) {
+        this.tracks = await Music.load({
+          field: 'album',
+          value: this.song.album,
+          sortBy: 'track'
+        });
+        this.currentTrack = this.tracks.findIndex(data => data.id === this.song.id);
+      }
       this.showContentView();
       this.player = this.loadAudio(this.getDownloadUrl('music', this.song.file));
-      this.player.play();
+      this.play();
     } catch (error) {
       if (error.code === 101) {
         this.showEmptyView();
@@ -41,6 +53,19 @@ export class MusicPlayerPage extends BasePage {
         this.showErrorView();
       }
     }
+  }
+
+  play() {
+    if (this.isAlbum) {
+      this.player.on('ended', event => {
+        if (this.tracks.length > this.currentTrack + 1) {
+          this.currentTrack++;
+          this.song = this.tracks[this.currentTrack];
+          this.play();
+        }
+      });
+    }
+    this.player.play();
   }
 
   loadAudio(url: string) {
