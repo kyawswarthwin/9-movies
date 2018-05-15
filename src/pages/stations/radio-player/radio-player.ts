@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, MenuController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 import Plyr from 'plyr';
 import Hls from 'hls.js';
@@ -22,7 +22,7 @@ export class RadioPlayerPage extends BasePage {
   hls: any;
   player: any;
 
-  constructor(public injector: Injector, public menuCtrl: MenuController) {
+  constructor(public injector: Injector) {
     super(injector);
 
     this.station = new Station();
@@ -35,12 +35,6 @@ export class RadioPlayerPage extends BasePage {
       await this.station.fetch();
       this.showContentView();
       this.player = this.loadAudio(this.station.url);
-      this.player.on('enterfullscreen', event => {
-        this.menuCtrl.enable(false);
-      });
-      this.player.on('exitfullscreen', event => {
-        this.menuCtrl.enable(true);
-      });
       this.player.play();
     } catch (error) {
       if (error.code === 101) {
