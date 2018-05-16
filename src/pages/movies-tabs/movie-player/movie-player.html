@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ movie.title && movie.year ? movie.title + ' - ' + movie.year : movie.file || 'Error' }}</ion-title>
+    <ion-buttons end>
+      <a ion-button icon-only [href]="download('movies', movie.id)" target="_blank">
+        <ion-icon name="download"></ion-icon>
+      </a>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
