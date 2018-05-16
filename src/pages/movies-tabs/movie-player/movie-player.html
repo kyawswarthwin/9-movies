@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ movie.title && movie.year ? movie.title + ' - ' + movie.year : 'Error' }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Movie."></message-view>
+  <message-view *ngIf="isEmptyView" icon="bookmark" message="Movie Not Found."></message-view>
+  <video [hidden]="!isContentView" controls crossorigin preload="none" #video></video>
+</ion-content>
