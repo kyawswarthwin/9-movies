@@ -8,7 +8,7 @@ export class MovieProvider extends Parse.Object {
     super('Movie');
   }
 
-  static load(params?: any, fields: any = ['title', 'artist']): Promise<MovieProvider[]> {
+  static load(params?: any, fields: any = ['title', 'artist', 'file']): Promise<MovieProvider[]> {
     return new Promise((resolve, reject) => {
       let query = new Parse.Query(this);
       if (params) {
