@@ -20,6 +20,7 @@ import { GameProvider } from '../providers/game/game';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true,
       scrollPadding: false,
       scrollAssist: true,
       autoFocusAssist: false
