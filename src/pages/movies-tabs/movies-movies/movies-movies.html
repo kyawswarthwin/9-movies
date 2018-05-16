@@ -37,7 +37,6 @@
       </ion-thumbnail>
       <h2>{{ movie.title || movie.file }}</h2>
       <p>{{ movie.year }}</p>
-      <p *ngIf="params.field !== 'genre'">{{ movie.genre }}</p>
     </button>
   </ion-list>
   <ion-infinite-scroll *ngIf="isContentView" (ionInfinite)="onLoadMore($event)">
