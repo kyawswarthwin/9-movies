@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ movie.title && movie.year ? movie.title + ' - ' + movie.year : 'Error' }}</ion-title>
+    <ion-title>{{ movie.title && movie.year ? movie.title + ' - ' + movie.year : movie.file || 'Error' }}</ion-title>
   </ion-navbar>
 </ion-header>
 

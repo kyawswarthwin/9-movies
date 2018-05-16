@@ -50,21 +50,22 @@ function watchMedia(request, status) {
   });
 }
 
-function onMovie(event, filePath) {
+async function onMovie(event, filePath) {
   const file = path.basename(filePath);
   switch (event) {
     case 'add':
     case 'change':
-      metadata(filePath)
+      const movie = new Movie();
+      movie.set('file', file);
+      let data = await metadata(filePath)
         .then(data => {
           delete data.album;
           delete data.track;
-          const movie = new Movie();
-          data.file = file;
-          data.picture = new Parse.File('picture', { base64: data.picture });
-          movie.save(data);
+          data.picture = data.picture && new Parse.File('picture', { base64: data.picture });
+          return data;
         })
         .catch(console.error);
+      movie.save(data);
       break;
     case 'unlink':
       const query = new Parse.Query(Movie);
