@@ -11,6 +11,7 @@ import { IonicPage } from 'ionic-angular';
 export class MoviesTabsPage {
   tab1Root: any = 'MoviesMoviesPage';
   tab2Root: any = 'MoviesGenresPage';
+  tab3Root: any = 'MoviesYearsPage';
 
   constructor() {}
 }
