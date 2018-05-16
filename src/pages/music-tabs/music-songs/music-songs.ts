@@ -5,7 +5,7 @@ import { BasePage } from '../../base/base';
 import { MusicProvider as Music } from '../../../providers/music/music';
 
 @IonicPage({
-  segment: 'songs'
+  segment: 'music/songs'
 })
 @Component({
   selector: 'page-music-songs',

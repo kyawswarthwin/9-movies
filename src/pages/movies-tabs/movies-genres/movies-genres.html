@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Genres</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-searchbar [(ngModel)]="params.search" (keyup.enter)="onSearch()" (ionClear)="onClearSearch()"></ion-searchbar>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item>
+      <ion-label>Sort By</ion-label>
+      <ion-select [(ngModel)]="column" (ionChange)="onReload()">
+        <ion-option value="genre">Genre</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="direction" (ionChange)="onReload()">
+        <ion-option value="">Ascending</ion-option>
+        <ion-option value="-">Descending</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="onReload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Genres."></message-view>
+  <message-view *ngIf="isEmptyView" icon="bookmark" message="No Genres Found."></message-view>
+  <ion-list *ngIf="isContentView">
+    <button ion-item *ngFor="let genre of genres" navPush="MoviesMoviesPage" [navParams]="{ field: 'genre', value: genre.objectId }">
+      {{ genre.objectId }}
+      <ion-badge item-end>{{ genre.count }}</ion-badge>
+    </button>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="isContentView" (ionInfinite)="onLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

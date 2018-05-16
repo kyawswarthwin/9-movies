@@ -7,11 +7,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
 
-import { ApplicationProvider } from '../providers/application/application';
-import { GameProvider } from '../providers/game/game';
+import { MovieProvider } from '../providers/movie/movie';
+import { MusicProvider } from '../providers/music/music';
 import { ChannelProvider } from '../providers/channel/channel';
 import { StationProvider } from '../providers/station/station';
-import { MusicProvider } from '../providers/music/music';
+import { ApplicationProvider } from '../providers/application/application';
+import { GameProvider } from '../providers/game/game';
 
 @NgModule({
   declarations: [MyApp],
@@ -30,11 +31,12 @@ import { MusicProvider } from '../providers/music/music';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     StatusBar,
     SplashScreen,
-    ApplicationProvider,
-    GameProvider,
+    MovieProvider,
+    MusicProvider,
     ChannelProvider,
     StationProvider,
-    MusicProvider
+    ApplicationProvider,
+    GameProvider
   ]
 })
 export class AppModule {}

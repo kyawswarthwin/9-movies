@@ -2,23 +2,33 @@ import { Component, Injector } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
 import { BasePage } from '../../base/base';
-import { MusicProvider as Music } from '../../../providers/music/music';
+import { MovieProvider as Movie } from '../../../providers/movie/movie';
 
 @IonicPage({
-  segment: 'music/artists'
+  segment: 'movies/movies'
 })
 @Component({
-  selector: 'page-music-artists',
-  templateUrl: 'music-artists.html'
+  selector: 'page-movies-movies',
+  templateUrl: 'movies-movies.html'
 })
-export class MusicArtistsPage extends BasePage {
-  params: any = { field: 'artist' };
-  artists: any[];
-  column: string = 'artist';
+export class MoviesMoviesPage extends BasePage {
+  params: any = {};
+  movies: Movie[];
+  column: string = 'updatedAt';
   direction: string = '';
 
   constructor(public injector: Injector) {
     super(injector);
+
+    this.params = this.navParams.data;
+    if (this.params.sortBy) {
+      let sortBy = this.params.sortBy;
+      if (sortBy.charAt(0) === '-') {
+        sortBy = sortBy.substr(1);
+        this.direction = '-';
+      }
+      this.column = sortBy;
+    }
   }
 
   ionViewWillEnter() {
@@ -28,10 +38,10 @@ export class MusicArtistsPage extends BasePage {
 
   async loadData() {
     try {
-      let data = await Music.listOf(this.params);
-      this.artists = this.artists.concat(data);
+      let data = await Movie.load(this.params);
+      this.movies = this.movies.concat(data);
       this.onRefreshComplete(data);
-      if (this.artists.length) {
+      if (this.movies.length) {
         this.showContentView();
       } else {
         this.showEmptyView();
@@ -63,7 +73,7 @@ export class MusicArtistsPage extends BasePage {
 
     this.params.sortBy = `${this.direction}${this.column}`;
     this.params.page = 0;
-    this.artists = [];
+    this.movies = [];
 
     this.loadData();
   }

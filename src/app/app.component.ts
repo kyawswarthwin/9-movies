@@ -27,7 +27,7 @@ export class MyApp {
       pages: [
         {
           title: 'Movies',
-          component: 'MoviesPage'
+          component: 'MoviesTabsPage'
         },
         {
           title: 'TV Series',
