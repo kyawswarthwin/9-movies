@@ -79,19 +79,20 @@ async function onMovie(event, filePath) {
   }
 }
 
-function onMusic(event, filePath) {
+async function onMusic(event, filePath) {
   const file = path.basename(filePath);
   switch (event) {
     case 'add':
     case 'change':
-      metadata(filePath)
+      const music = new Music();
+      music.set('file', file);
+      let data = await metadata(filePath)
         .then(data => {
-          const music = new Music();
-          data.file = file;
-          data.picture = new Parse.File('picture', { base64: data.picture });
-          music.save(data);
+          data.picture = data.picture && new Parse.File('picture', { base64: data.picture });
+          return data;
         })
         .catch(console.error);
+      music.save(data);
       break;
     case 'unlink':
       const query = new Parse.Query(Music);

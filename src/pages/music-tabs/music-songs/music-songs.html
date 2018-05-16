@@ -36,7 +36,7 @@
       <ion-thumbnail *ngIf="params.field !== 'album'" item-start>
         <img [src]="song.picture ? song.picture.url() : 'assets/imgs/thumbnail.png'">
       </ion-thumbnail>
-      <h2>{{ song.title }}</h2>
+      <h2>{{ song.title || song.file }}</h2>
       <p *ngIf="params.field !== 'artist'">{{ song.artist }}</p>
       <p *ngIf="params.field !== 'album'">{{ song.album }}</p>
       <h2 *ngIf="params.field === 'album'" item-end>{{ song.track }}</h2>

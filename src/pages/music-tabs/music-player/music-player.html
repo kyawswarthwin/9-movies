@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ song.title && song.album ? song.title + ' - ' + song.album : 'Error' }}</ion-title>
+    <ion-title>{{ song.title && song.album ? song.title + ' - ' + song.album : song.file || 'Error' }}</ion-title>
     <ion-buttons end>
       <a ion-button icon-only [href]="download('music', song.id)" target="_blank">
         <ion-icon name="download"></ion-icon>
