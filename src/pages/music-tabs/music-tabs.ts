@@ -5,10 +5,10 @@ import { IonicPage } from 'ionic-angular';
   segment: 'music'
 })
 @Component({
-  selector: 'page-music',
-  templateUrl: 'music.html'
+  selector: 'page-music-tabs',
+  templateUrl: 'music-tabs.html'
 })
-export class MusicPage {
+export class MusicTabsPage {
   tab1Root: any = 'MusicSongsPage';
   tab2Root: any = 'MusicArtistsPage';
   tab3Root: any = 'MusicAlbumsPage';
