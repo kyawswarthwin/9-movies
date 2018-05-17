@@ -34,7 +34,7 @@
   <ion-list *ngIf="isContentView">
     <button ion-item *ngFor="let song of songs; let i = index" navPush="MusicPlayerPage" [navParams]="params.field === 'album' ? { id: song.id, isAlbum: true } : { id: song.id, isAlbum: false }">
       <ion-thumbnail *ngIf="params.field !== 'album'" item-start>
-        <img [src]="song.picture ? song.picture.url() : 'assets/imgs/thumbnail.png'">
+        <img [src]="song.picture ? song.picture.url() : 'assets/imgs/cover.png'">
       </ion-thumbnail>
       <h2>{{ song.title || song.file }}</h2>
       <p *ngIf="params.field !== 'artist'">{{ song.artist }}</p>

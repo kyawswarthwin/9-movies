@@ -32,7 +32,7 @@
   <ion-list *ngIf="isContentView">
     <button ion-item *ngFor="let game of games" navPush="GameDetailPage" [navParams]="{ id: game.id }">
       <ion-thumbnail item-start>
-        <img [src]="game.icon ? game.icon.url() : 'assets/imgs/thumbnail.png'">
+        <img [src]="game.icon ? game.icon.url() : 'assets/imgs/cover.png'">
       </ion-thumbnail>
       <h2>{{ game.name }}</h2>
       <p>Version: {{ game.versionName }}</p>

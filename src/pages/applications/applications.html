@@ -32,7 +32,7 @@
   <ion-list *ngIf="isContentView">
     <button ion-item *ngFor="let application of applications" navPush="ApplicationDetailPage" [navParams]="{ id: application.id }">
       <ion-thumbnail item-start>
-        <img [src]="application.icon ? application.icon.url() : 'assets/imgs/thumbnail.png'">
+        <img [src]="application.icon ? application.icon.url() : 'assets/imgs/cover.png'">
       </ion-thumbnail>
       <h2>{{ application.name }}</h2>
       <p>Version: {{ application.versionName }}</p>

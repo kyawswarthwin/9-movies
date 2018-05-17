@@ -1,6 +1,6 @@
 export const PARSE_SERVER = {
   APP_ID: 'myAppId',
-  URL: 'http://localhost:1337/parse'
+  URL: 'http://192.168.0.100:1337/parse'
 };
 
 export const HOME_PAGE: any = 'MoviesTabsPage';

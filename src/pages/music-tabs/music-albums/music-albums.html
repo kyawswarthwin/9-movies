@@ -31,7 +31,7 @@
   <ion-list *ngIf="isContentView">
     <button ion-item *ngFor="let album of albums" navPush="MusicSongsPage" [navParams]="{ field: 'album', value: album.objectId, sortBy: 'track' }">
       <ion-thumbnail item-start>
-        <img [src]="album.picture ? album.picture.url() : 'assets/imgs/thumbnail.png'">
+        <img [src]="album.picture ? album.picture.url() : 'assets/imgs/cover.png'">
       </ion-thumbnail>
       <h2>{{ album.objectId || 'Unknown' }}</h2>
       <ion-badge item-end>{{ album.count }}</ion-badge>
