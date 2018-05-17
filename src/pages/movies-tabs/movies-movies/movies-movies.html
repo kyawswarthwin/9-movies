@@ -30,15 +30,19 @@
   </ion-refresher>
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Movies."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Movies Found."></message-view>
-  <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let movie of movies" navPush="MoviePlayerPage" [navParams]="{ id: movie.id }">
-      <ion-thumbnail item-start>
-        <img [src]="movie.picture ? movie.picture.url() : 'assets/imgs/thumbnail.png'">
-      </ion-thumbnail>
-      <h2>{{ movie.title || movie.file }}</h2>
-      <p>{{ movie.year }}</p>
-    </button>
-  </ion-list>
+  <ion-grid *ngIf="isContentView" no-padding>
+    <ion-row>
+      <ion-col col-6 col-md-4 col-xl-2 *ngFor="let movie of movies" navPush="MoviePlayerPage" [navParams]="{ id: movie.id }">
+        <ion-card>
+          <img [src]="movie.picture ? movie.picture.url() : 'assets/imgs/poster.png'">
+          <ion-card-content>
+            <div class="title">{{ movie.title || movie.file }}</div>
+            <p>{{ movie.year || 'Unknown' }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-infinite-scroll *ngIf="isContentView" (ionInfinite)="onLoadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
