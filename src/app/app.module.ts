@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyApp } from './app.component';
 
 import { MovieProvider } from '../providers/movie/movie';
+import { SerieProvider } from '../providers/serie/serie';
 import { MusicProvider } from '../providers/music/music';
 import { ChannelProvider } from '../providers/channel/channel';
 import { StationProvider } from '../providers/station/station';
@@ -33,6 +34,7 @@ import { GameProvider } from '../providers/game/game';
     StatusBar,
     SplashScreen,
     MovieProvider,
+    SerieProvider,
     MusicProvider,
     ChannelProvider,
     StationProvider,
