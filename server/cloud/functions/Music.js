@@ -34,9 +34,7 @@ function musicListOf(request, response) {
     count: { $sum: 1 }
   };
   if (request.params.field === 'album') {
-    pipeline[0]['group']['picture'] = {
-      $first: '$picture'
-    };
+    pipeline[0]['group']['picture'] = { $first: '$picture' };
   }
   query
     .aggregate(pipeline)

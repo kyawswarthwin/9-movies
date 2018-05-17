@@ -31,12 +31,11 @@ function serieListOf(request, response) {
   }
   pipeline[0]['group'] = {
     objectId: `$${request.params.field}`,
+    year: { $first: '$year' },
     count: { $sum: 1 }
   };
   if (request.params.field === 'album') {
-    pipeline[0]['group']['picture'] = {
-      $first: '$picture'
-    };
+    pipeline[0]['group']['picture'] = { $first: '$picture' };
   }
   query
     .aggregate(pipeline)

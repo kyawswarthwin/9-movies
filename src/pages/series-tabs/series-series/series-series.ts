@@ -1,25 +1,70 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, Injector } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
 
-/**
- * Generated class for the SeriesSeriesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { BasePage } from '../../base/base';
+import { SerieProvider as Serie } from '../../../providers/serie/serie';
 
-@IonicPage()
+@IonicPage({
+  segment: 'series/series'
+})
 @Component({
   selector: 'page-series-series',
-  templateUrl: 'series-series.html',
+  templateUrl: 'series-series.html'
 })
-export class SeriesSeriesPage {
+export class SeriesSeriesPage extends BasePage {
+  params: any = { field: 'album' };
+  series: any[];
+  column: string = 'album';
+  direction: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public injector: Injector) {
+    super(injector);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SeriesSeriesPage');
+  ionViewWillEnter() {
+    this.showLoadingView('Loading...');
+    this.onReload();
   }
 
+  async loadData() {
+    try {
+      let data = await Serie.listOf(this.params);
+      this.series = this.series.concat(data);
+      this.onRefreshComplete(data);
+      if (this.series.length) {
+        this.showContentView();
+      } else {
+        this.showEmptyView();
+      }
+    } catch (error) {
+      this.onRefreshComplete();
+      this.showErrorView();
+    }
+  }
+
+  onSearch() {
+    this.showLoadingView('Searching...');
+    this.onReload();
+  }
+
+  onClearSearch() {
+    this.params.search = '';
+    this.ionViewWillEnter();
+  }
+
+  onLoadMore(infiniteScroll: any) {
+    this.infiniteScroll = infiniteScroll;
+    this.params.page++;
+    this.loadData();
+  }
+
+  onReload(refresher?: any) {
+    this.refresher = refresher;
+
+    this.params.sortBy = `${this.direction}${this.column}`;
+    this.params.page = 0;
+    this.series = [];
+
+    this.loadData();
+  }
 }
