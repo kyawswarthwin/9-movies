@@ -31,7 +31,7 @@ export class MyApp {
         },
         {
           title: 'TV Series',
-          component: 'TvSeriesPage'
+          component: 'SeriesTabsPage'
         },
         {
           title: 'Music',
