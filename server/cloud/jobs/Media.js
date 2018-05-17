@@ -7,6 +7,7 @@ const metadata = require('easy-metadata');
 const packageInfo = require('easy-aapt');
 
 const Movie = require('../../app/models/Movie');
+const Serie = require('../../app/models/Serie');
 const Music = require('../../app/models/Music');
 const Application = require('../../app/models/Application');
 const Game = require('../../app/models/Game');
@@ -14,6 +15,7 @@ const Game = require('../../app/models/Game');
 const mediaDir = process.env.MEDIA_DIR || path.join(process.cwd(), 'media');
 const Media = {
   Movie: ['.mp4'],
+  Serie: ['.mp4'],
   Music: ['.mp3'],
   Application: ['.apk'],
   Game: ['.apk']
@@ -34,6 +36,9 @@ function watchMedia(request, status) {
     switch (type) {
       case 'movies':
         if (Media.Movie.includes(ext)) onMovie(event, filePath);
+        break;
+      case 'series':
+        if (Media.Serie.includes(ext)) onSerie(event, filePath);
         break;
       case 'music':
         if (Media.Music.includes(ext)) onMusic(event, filePath);
@@ -69,6 +74,33 @@ async function onMovie(event, filePath) {
       break;
     case 'unlink':
       const query = new Parse.Query(Movie);
+      query.equalTo('file', file);
+      query.first().then(data => {
+        data.destroy();
+      });
+      break;
+    default:
+      break;
+  }
+}
+
+async function onSerie(event, filePath) {
+  const file = path.basename(filePath);
+  switch (event) {
+    case 'add':
+    case 'change':
+      const serie = new Serie();
+      serie.set('file', file);
+      let data = await metadata(filePath)
+        .then(data => {
+          data.picture = data.picture && new Parse.File('picture', { base64: data.picture });
+          return data;
+        })
+        .catch(console.error);
+      serie.save(data);
+      break;
+    case 'unlink':
+      const query = new Parse.Query(Serie);
       query.equalTo('file', file);
       query.first().then(data => {
         data.destroy();
