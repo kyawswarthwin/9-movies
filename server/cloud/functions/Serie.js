@@ -49,6 +49,32 @@ function serieListOf(request, response) {
     .catch(response.error);
 }
 
+function serieLoad(request, response) {
+  let query = new Parse.Query(Serie);
+  query
+    .aggregate([
+      {
+        match: {
+          album: request.params.title
+        },
+        group: {
+          objectId: `$comment`,
+          count: { $sum: 1 },
+          episodes: {
+            $push: {
+              file: '$file',
+              title: '$title',
+              track: '$track'
+            }
+          }
+        }
+      }
+    ])
+    .then(response.success)
+    .catch(response.error);
+}
+
 module.exports = {
-  serieListOf: serieListOf
+  serieListOf: serieListOf,
+  serieLoad: serieLoad
 };

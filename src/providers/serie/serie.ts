@@ -8,43 +8,9 @@ export class SerieProvider extends Parse.Object {
     super('Serie');
   }
 
-  static load(params?: any, fields: any = ['title', 'artist', 'album']): Promise<SerieProvider[]> {
+  static load(params: any): Promise<any[]> {
     return new Promise((resolve, reject) => {
-      let query = new Parse.Query(this);
-      if (params) {
-        // Series By
-        if (params.by) {
-          query.equalTo(params.by, params.value);
-          fields = fields.filter(data => data !== params.by);
-        }
-        // Search
-        if (params.search) {
-          let queries = [];
-          fields.forEach((field, index) => {
-            queries[index] = new Parse.Query(this);
-            queries[index].contains(field, params.search);
-          });
-          query = Parse.Query.or(...queries);
-        }
-        // Sort
-        if (params.sortBy) {
-          let sortBy = params.sortBy;
-          if (sortBy.charAt(0) === '-') {
-            sortBy = sortBy.substr(1);
-            query.descending(sortBy);
-          } else {
-            query.ascending(sortBy);
-          }
-        }
-        // Paginate
-        if (params.page >= 0) {
-          let limit = params.limit || 15;
-          query.limit(limit);
-          query.skip(params.page * limit);
-        }
-      }
-      query
-        .find()
+      Parse.Cloud.run('serieLoad', params)
         .then(resolve)
         .catch(reject);
     });

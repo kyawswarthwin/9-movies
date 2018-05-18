@@ -25,8 +25,7 @@ export class SerieDetailPage extends BasePage {
   async ionViewDidLoad() {
     try {
       this.showLoadingView('Loading...');
-      let data = await Serie.listOf(this.params);
-      this.series = data;
+      this.series = await Serie.load({ title: this.title });
       this.showContentView();
     } catch (error) {
       this.showErrorView();
