@@ -32,7 +32,7 @@
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Movies Found."></message-view>
   <ion-grid *ngIf="isContentView" no-padding>
     <ion-row>
-      <ion-col col-6 col-md-4 col-xl-2 *ngFor="let movie of movies" navPush="MoviePlayerPage" [navParams]="{ id: movie.id }">
+      <ion-col col-6 col-md-4 col-xl-2 *ngFor="let movie of movies" navPush="VideoPlayerPage" [navParams]="{ id: movie.id }">
         <ion-card>
           <img [src]="movie.picture ? movie.picture.url() : 'assets/imgs/poster.png'">
           <ion-card-content>

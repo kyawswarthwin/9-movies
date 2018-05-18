@@ -7,14 +7,13 @@ import { BasePage } from '../../base/base';
 import { MovieProvider as Movie } from '../../../providers/movie/movie';
 
 @IonicPage({
-  segment: 'play/movie/:id',
-  defaultHistory: ['MoviesMoviesPage']
+  segment: 'play/video/:id'
 })
 @Component({
-  selector: 'page-movie-player',
-  templateUrl: 'movie-player.html'
+  selector: 'page-video-player',
+  templateUrl: 'video-player.html'
 })
-export class MoviePlayerPage extends BasePage {
+export class VideoPlayerPage extends BasePage {
   @ViewChild('video') video: ElementRef;
 
   movie: Movie;
