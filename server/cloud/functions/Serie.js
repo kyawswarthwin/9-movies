@@ -57,6 +57,10 @@ function serieLoad(request, response) {
         match: {
           album: request.params.title
         },
+        sort: {
+          comment: -1,
+          track: 1
+        },
         group: {
           objectId: `$comment`,
           count: { $sum: 1 },
