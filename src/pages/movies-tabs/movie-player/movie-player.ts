@@ -7,7 +7,7 @@ import { BasePage } from '../../base/base';
 import { MovieProvider as Movie } from '../../../providers/movie/movie';
 
 @IonicPage({
-  segment: 'movies/:id',
+  segment: 'play/movie/:id',
   defaultHistory: ['MoviesMoviesPage']
 })
 @Component({

@@ -32,7 +32,7 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Songs."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Songs Found."></message-view>
   <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let song of songs; let i = index" navPush="AudioPlayerPage" [navParams]="params.field === 'album' ? { id: song.id, isAlbum: true } : { id: song.id, isAlbum: false }">
+    <button ion-item *ngFor="let song of songs; let i = index" navPush="MusicPlayerPage" [navParams]="params.field === 'album' ? { id: song.id, isAlbum: true } : { id: song.id, isAlbum: false }">
       <ion-thumbnail *ngIf="params.field !== 'album'" item-start>
         <img [src]="song.picture ? song.picture.url() : 'assets/imgs/cover.png'">
       </ion-thumbnail>
