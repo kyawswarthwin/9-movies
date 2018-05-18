@@ -8,7 +8,7 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Serie."></message-view>
   <div *ngIf="isContentView">
     <ion-list *ngFor="let serie of series">
-      <ion-item-divider>
+      <ion-item-divider *ngIf="serie.objectId">
         {{ 'Season ' + serie.objectId }}
         <ion-note item-end>{{ serie.count + ' Episodes' }}</ion-note>
       </ion-item-divider>
