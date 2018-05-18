@@ -11,10 +11,10 @@ import { MusicProvider as Music } from '../../../providers/music/music';
   defaultHistory: ['MusicSongsPage']
 })
 @Component({
-  selector: 'page-music-player',
-  templateUrl: 'music-player.html'
+  selector: 'page-audio-player',
+  templateUrl: 'audio-player.html'
 })
-export class MusicPlayerPage extends BasePage {
+export class AudioPlayerPage extends BasePage {
   @ViewChild('audio') audio: ElementRef;
 
   song: Music;
