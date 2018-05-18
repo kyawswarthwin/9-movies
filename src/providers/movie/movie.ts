@@ -13,9 +13,9 @@ export class MovieProvider extends Parse.Object {
       let query = new Parse.Query(this);
       if (params) {
         // Songs By
-        if (params.field) {
-          query.equalTo(params.field, params.value);
-          fields = fields.filter(data => data !== params.field);
+        if (params.by) {
+          query.equalTo(params.by, params.value);
+          fields = fields.filter(data => data !== params.by);
         }
         // Search
         if (params.search) {

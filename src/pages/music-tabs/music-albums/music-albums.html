@@ -29,7 +29,7 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Albums."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Albums Found."></message-view>
   <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let album of albums" navPush="MusicSongsPage" [navParams]="{ field: 'album', value: album.objectId, sortBy: 'track' }">
+    <button ion-item *ngFor="let album of albums" navPush="MusicSongsPage" [navParams]="{ by: 'album', value: album.objectId, sortBy: 'track' }">
       <ion-thumbnail item-start>
         <img [src]="album.picture ? album.picture.url() : 'assets/imgs/cover.png'">
       </ion-thumbnail>

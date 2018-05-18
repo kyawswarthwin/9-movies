@@ -29,7 +29,7 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Years."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Years Found."></message-view>
   <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let year of years" navPush="MoviesMoviesPage" [navParams]="{ field: 'year', value: year.objectId }">
+    <button ion-item *ngFor="let year of years" navPush="MoviesMoviesPage" [navParams]="{ by: 'year', value: year.objectId }">
       {{ year.objectId || 'Unknown' }}
       <ion-badge item-end>{{ year.count }}</ion-badge>
     </button>

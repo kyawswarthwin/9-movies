@@ -29,7 +29,7 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Artists."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Artists Found."></message-view>
   <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let artist of artists" navPush="MusicSongsPage" [navParams]="{ field: 'artist', value: artist.objectId }">
+    <button ion-item *ngFor="let artist of artists" navPush="MusicSongsPage" [navParams]="{ by: 'artist', value: artist.objectId }">
       {{ artist.objectId || 'Unknown' }}
       <ion-badge item-end>{{ artist.count }}</ion-badge>
     </button>

@@ -29,7 +29,7 @@
   <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Genres."></message-view>
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Genres Found."></message-view>
   <ion-list *ngIf="isContentView">
-    <button ion-item *ngFor="let genre of genres" navPush="MusicSongsPage" [navParams]="{ field: 'genre', value: genre.objectId }">
+    <button ion-item *ngFor="let genre of genres" navPush="MusicSongsPage" [navParams]="{ by: 'genre', value: genre.objectId }">
       {{ genre.objectId || 'Unknown' }}
       <ion-badge item-end>{{ genre.count }}</ion-badge>
     </button>
