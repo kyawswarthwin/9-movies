@@ -12,7 +12,7 @@ export class MovieProvider extends Parse.Object {
     return new Promise((resolve, reject) => {
       let query = new Parse.Query(this);
       if (params) {
-        // Songs By
+        // Movies By
         if (params.by) {
           query.equalTo(params.by, params.value);
           fields = fields.filter(data => data !== params.by);

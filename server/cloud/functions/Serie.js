@@ -6,9 +6,15 @@ function serieListOf(request, response) {
   let query = new Parse.Query(Serie);
   let pipeline = [{}];
   let direction = -1;
+  // Series By
+  if (request.params.by) {
+    pipeline[0]['match'] = {
+      [`${request.params.by}`]: { $regex: request.params.value }
+    };
+  }
   // Search
   if (request.params.search) {
-    pipeline[0]['match'] = {
+    pipeline[pipeline.length - 1]['match'] = {
       [`${request.params.field}`]: { $regex: request.params.search }
     };
   }
@@ -19,23 +25,23 @@ function serieListOf(request, response) {
       sortBy = sortBy.substr(1);
       direction = 1;
     }
-    pipeline[0]['sort'] = {
+    pipeline[pipeline.length - 1]['sort'] = {
       [`${sortBy}`]: direction
     };
   }
   // Paginate
   if (request.params.page >= 0) {
     let limit = request.params.limit || 15;
-    pipeline[0]['limit'] = limit;
-    pipeline[0]['skip'] = request.params.page * limit;
+    pipeline[pipeline.length - 1]['limit'] = limit;
+    pipeline[pipeline.length - 1]['skip'] = request.params.page * limit;
   }
-  pipeline[0]['group'] = {
+  pipeline[pipeline.length - 1]['group'] = {
     objectId: `$${request.params.field}`,
     year: { $first: '$year' },
     count: { $sum: 1 }
   };
   if (request.params.field === 'album') {
-    pipeline[0]['group']['picture'] = { $first: '$picture' };
+    pipeline[pipeline.length - 1]['group']['picture'] = { $first: '$picture' };
   }
   query
     .aggregate(pipeline)

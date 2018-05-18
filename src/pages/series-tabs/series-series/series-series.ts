@@ -19,6 +19,16 @@ export class SeriesSeriesPage extends BasePage {
 
   constructor(public injector: Injector) {
     super(injector);
+
+    this.params = { ...this.params, ...this.navParams.data };
+    if (this.params.sortBy) {
+      let sortBy = this.params.sortBy;
+      if (sortBy.charAt(0) === '-') {
+        sortBy = sortBy.substr(1);
+        this.direction = '-';
+      }
+      this.column = sortBy;
+    }
   }
 
   ionViewWillEnter() {
