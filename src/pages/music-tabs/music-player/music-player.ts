@@ -8,7 +8,7 @@ import { MusicProvider as Music } from '../../../providers/music/music';
 
 @IonicPage({
   segment: 'songs/:id/:isAlbum',
-  defaultHistory: ['MusicTabsPage']
+  defaultHistory: ['MusicSongsPage']
 })
 @Component({
   selector: 'page-music-player',

@@ -8,7 +8,7 @@ import { MovieProvider as Movie } from '../../../providers/movie/movie';
 
 @IonicPage({
   segment: 'movies/:id',
-  defaultHistory: ['MoviesTabsPage']
+  defaultHistory: ['MoviesMoviesPage']
 })
 @Component({
   selector: 'page-movie-player',
