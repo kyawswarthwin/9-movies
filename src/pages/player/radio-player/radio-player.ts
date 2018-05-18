@@ -1,46 +1,40 @@
 import { Component, Injector, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, MenuController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 import Plyr from 'plyr';
 import Hls from 'hls.js';
 
 import { BasePage } from '../../base/base';
-import { ChannelProvider as Channel } from '../../../providers/channel/channel';
+import { StationProvider as Station } from '../../../providers/station/station';
 
 @IonicPage({
-  segment: 'channels/:id',
-  defaultHistory: ['ChannelsPage']
+  segment: 'play/radio/:id',
+  defaultHistory: ['StationsPage']
 })
 @Component({
-  selector: 'page-tv-player',
-  templateUrl: 'tv-player.html'
+  selector: 'page-radio-player',
+  templateUrl: 'radio-player.html'
 })
-export class TvPlayerPage extends BasePage {
-  @ViewChild('video') video: ElementRef;
+export class RadioPlayerPage extends BasePage {
+  @ViewChild('audio') audio: ElementRef;
 
-  channel: Channel;
+  station: Station;
   hls: any;
   player: any;
 
-  constructor(public injector: Injector, public menuCtrl: MenuController) {
+  constructor(public injector: Injector) {
     super(injector);
 
-    this.channel = new Channel();
-    this.channel.id = this.navParams.data.id;
+    this.station = new Station();
+    this.station.id = this.navParams.data.id;
   }
 
   async ionViewDidLoad() {
     try {
       this.showLoadingView('Loading...');
-      await this.channel.fetch();
+      await this.station.fetch();
       this.showContentView();
-      this.player = this.loadVideo(this.channel.url);
-      this.player.on('enterfullscreen', event => {
-        this.menuCtrl.enable(false);
-      });
-      this.player.on('exitfullscreen', event => {
-        this.menuCtrl.enable(true);
-      });
+      this.player = this.loadAudio(this.station.url);
       this.player.play();
     } catch (error) {
       if (error.code === 101) {
@@ -55,14 +49,14 @@ export class TvPlayerPage extends BasePage {
     if (this.hls) this.hls.detachMedia();
   }
 
-  loadVideo(url: string) {
-    const video = this.video.nativeElement as HTMLVideoElement;
+  loadAudio(url: string) {
+    const audio = this.audio.nativeElement as HTMLAudioElement;
     if (Hls.isSupported()) {
       this.hls = new Hls();
       this.hls.loadSource(url);
-      this.hls.attachMedia(video);
+      this.hls.attachMedia(audio);
     }
-    return new Plyr(video, {
+    return new Plyr(audio, {
       iconUrl: 'assets/imgs/plyr.svg',
       blankVideo: 'assets/misc/blank.mp4',
       controls: [
