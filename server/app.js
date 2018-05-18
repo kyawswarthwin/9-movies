@@ -81,6 +81,9 @@ app.get('/download', async (req, res) => {
       case 'movies':
         Obj = require('./app/models/Movie');
         break;
+      case 'series':
+        Obj = require('./app/models/Serie');
+        break;
       case 'music':
         Obj = require('./app/models/Music');
         break;

@@ -12,7 +12,7 @@
         {{ 'Season ' + serie.objectId }}
         <ion-note item-end>{{ serie.count + ' Episodes' }}</ion-note>
       </ion-item-divider>
-      <button ion-item *ngFor="let episode of serie.episodes">
+      <button ion-item *ngFor="let episode of serie.episodes" navPush="VideoPlayerPage" [navParams]="{ id: episode.id, isSerie: true }">
         {{ episode.track && episode.title ? episode.track + '. ' + episode.title : episode.file }}
       </button>
     </ion-list>

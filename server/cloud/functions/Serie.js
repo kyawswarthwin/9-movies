@@ -62,6 +62,7 @@ function serieLoad(request, response) {
           count: { $sum: 1 },
           episodes: {
             $push: {
+              id: '$_id',
               file: '$file',
               title: '$title',
               track: '$track'

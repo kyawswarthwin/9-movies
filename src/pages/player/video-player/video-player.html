@@ -1,8 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ movie.title && movie.year ? movie.title + ' - ' + movie.year : movie.file || 'Error' }}</ion-title>
+    <ion-title *ngIf="!isSerie">{{ movie.title && movie.year ? movie.title + ' - ' + movie.year : movie.file || 'Error' }}</ion-title>
+    <ion-title *ngIf="isSerie">{{ movie.title && movie.album ? movie.title + ' - ' + movie.album : movie.file || 'Error' }}</ion-title>
     <ion-buttons end>
-      <a ion-button icon-only [href]="download('movies', movie.id)" target="_blank">
+      <a ion-button icon-only [href]="download(isSerie ? 'series' : 'movies', movie.id)" target="_blank">
         <ion-icon name="download"></ion-icon>
       </a>
     </ion-buttons>

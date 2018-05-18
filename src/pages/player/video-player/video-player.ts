@@ -5,9 +5,10 @@ import Plyr from 'plyr';
 
 import { BasePage } from '../../base/base';
 import { MovieProvider as Movie } from '../../../providers/movie/movie';
+import { SerieProvider as Serie } from '../../../providers/serie/serie';
 
 @IonicPage({
-  segment: 'play/video/:id'
+  segment: 'play/video/:id/:isSerie'
 })
 @Component({
   selector: 'page-video-player',
@@ -16,13 +17,15 @@ import { MovieProvider as Movie } from '../../../providers/movie/movie';
 export class VideoPlayerPage extends BasePage {
   @ViewChild('video') video: ElementRef;
 
-  movie: Movie;
+  isSerie: boolean;
+  movie: any;
   player: any;
 
   constructor(public injector: Injector, public menuCtrl: MenuController) {
     super(injector);
 
-    this.movie = new Movie();
+    this.isSerie = this.navParams.data.isSerie;
+    this.movie = this.isSerie ? new Serie() : new Movie();
     this.movie.id = this.navParams.data.id;
   }
 
@@ -31,7 +34,9 @@ export class VideoPlayerPage extends BasePage {
       this.showLoadingView('Loading...');
       await this.movie.fetch();
       this.showContentView();
-      this.player = this.loadVideo(this.getMediaUrl('movies', this.movie.file));
+      this.player = this.loadVideo(
+        this.getMediaUrl(this.isSerie ? 'series' : 'movies', this.movie.file)
+      );
       this.player.on('enterfullscreen', event => {
         this.menuCtrl.enable(false);
       });
