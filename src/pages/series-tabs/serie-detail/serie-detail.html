@@ -10,7 +10,7 @@
     <ion-list *ngFor="let serie of series">
       <ion-item-divider>
         {{ 'Season ' + serie.objectId }}
-        <ion-badge item-end>{{ serie.count }}</ion-badge>
+        <ion-note item-end>{{ serie.count + ' Episodes' }}</ion-note>
       </ion-item-divider>
       <button ion-item *ngFor="let episode of serie.episodes">
         {{ episode.track && episode.title ? episode.track + '. ' + episode.title : episode.file }}
