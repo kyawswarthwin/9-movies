@@ -101,7 +101,7 @@ app.get('/download', async (req, res) => {
     query.equalTo('objectId', id);
     let data = await query.first();
     if (data) {
-      res.download(path.join(mediaDir, type, data.get('file')));
+      res.download(path.join(mediaDir, data.get('file')));
     } else {
       throw new Error();
     }
