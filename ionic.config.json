@@ -2,5 +2,7 @@
   "name": "9 Movies",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
