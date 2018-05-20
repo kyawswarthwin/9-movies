@@ -25,29 +25,28 @@ function watchMedia(request, status) {
   const watcher = chokidar.watch('.', {
     ignoreInitial: true,
     cwd: mediaDir,
-    depth: 1,
     awaitWriteFinish: true,
     ignorePermissionErrors: true
   });
-  watcher.on('all', (event, filePath) => {
-    const type = filePath && filePath.match(/[^/\\]+/)[0].toLowerCase();
-    const ext = path.extname(filePath).toLowerCase();
-    filePath = path.join(mediaDir, filePath);
+  watcher.on('all', (event, file) => {
+    const type = file && file.match(/[^/\\]+/)[0].toLowerCase();
+    const ext = path.extname(file).toLowerCase();
+    file = file.replace(/\\/g, '/');
     switch (type) {
       case 'movies':
-        if (Media.Movie.includes(ext)) onMovie(event, filePath);
+        if (Media.Movie.includes(ext)) onMovie(event, file);
         break;
       case 'series':
-        if (Media.Serie.includes(ext)) onSerie(event, filePath);
+        if (Media.Serie.includes(ext)) onSerie(event, file);
         break;
       case 'music':
-        if (Media.Music.includes(ext)) onMusic(event, filePath);
+        if (Media.Music.includes(ext)) onMusic(event, file);
         break;
       case 'applications':
-        if (Media.Application.includes(ext)) onApplication(event, filePath);
+        if (Media.Application.includes(ext)) onApplication(event, file);
         break;
       case 'games':
-        if (Media.Game.includes(ext)) onGame(event, filePath);
+        if (Media.Game.includes(ext)) onGame(event, file);
         break;
       default:
         break;
@@ -55,8 +54,8 @@ function watchMedia(request, status) {
   });
 }
 
-async function onMovie(event, filePath) {
-  const file = path.basename(filePath);
+async function onMovie(event, file) {
+  const filePath = path.join(mediaDir, file);
   switch (event) {
     case 'add':
     case 'change':
@@ -84,8 +83,8 @@ async function onMovie(event, filePath) {
   }
 }
 
-async function onSerie(event, filePath) {
-  const file = path.basename(filePath);
+async function onSerie(event, file) {
+  const filePath = path.join(mediaDir, file);
   switch (event) {
     case 'add':
     case 'change':
@@ -111,8 +110,8 @@ async function onSerie(event, filePath) {
   }
 }
 
-async function onMusic(event, filePath) {
-  const file = path.basename(filePath);
+async function onMusic(event, file) {
+  const filePath = path.join(mediaDir, file);
   switch (event) {
     case 'add':
     case 'change':
@@ -138,8 +137,8 @@ async function onMusic(event, filePath) {
   }
 }
 
-function onApplication(event, filePath) {
-  const file = path.basename(filePath);
+function onApplication(event, file) {
+  const filePath = path.join(mediaDir, file);
   switch (event) {
     case 'add':
     case 'change':
@@ -164,8 +163,8 @@ function onApplication(event, filePath) {
   }
 }
 
-function onGame(event, filePath) {
-  const file = path.basename(filePath);
+function onGame(event, file) {
+  const filePath = path.join(mediaDir, file);
   switch (event) {
     case 'add':
     case 'change':

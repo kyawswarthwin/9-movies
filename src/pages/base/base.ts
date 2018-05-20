@@ -169,8 +169,8 @@ export abstract class BasePage {
     this.viewCtrl.dismiss(data);
   }
 
-  getMediaUrl(type: string, file: string) {
-    return new URL(`/media/${type}/${file}`, PARSE_SERVER.URL).href;
+  getMediaUrl(file: string) {
+    return new URL(`/media/${file}`, PARSE_SERVER.URL).href;
   }
 
   download(type: string, id: string) {

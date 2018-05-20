@@ -34,9 +34,7 @@ export class VideoPlayerPage extends BasePage {
       this.showLoadingView('Loading...');
       await this.movie.fetch();
       this.showContentView();
-      this.player = this.loadVideo(
-        this.getMediaUrl(this.isSerie ? 'series' : 'movies', this.movie.file)
-      );
+      this.player = this.loadVideo(this.getMediaUrl(this.movie.file));
       this.player.on('enterfullscreen', event => {
         this.menuCtrl.enable(false);
       });

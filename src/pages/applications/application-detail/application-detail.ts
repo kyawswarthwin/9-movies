@@ -31,7 +31,7 @@ export class ApplicationDetailPage extends BasePage {
       this.showLoadingView('Loading...');
       await this.application.fetch();
       await this.http
-        .get(this.getMediaUrl('applications', `${this.application.file.split('.')[0]}.html`), {
+        .get(this.getMediaUrl(`${this.application.file.split('.')[0]}.html`), {
           responseType: 'text'
         })
         .first()
