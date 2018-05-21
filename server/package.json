@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kyawswarthwin/parse-server-boilerplate#readme",
   "dependencies": {
+    "chalk": "^2.4.1",
     "chokidar": "^2.0.3",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
@@ -30,6 +31,7 @@
     "express": "^4.16.3",
     "parse-server": "^2.7.4",
     "response-time": "^2.3.2",
+    "systeminformation": "^3.41.3",
     "url-join": "^4.0.0"
   },
   "bin": "app.js",
