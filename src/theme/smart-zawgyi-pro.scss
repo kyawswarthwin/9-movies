@@ -1,0 +1,10 @@
+$smart-zawgyi-pro-font-path: $font-path !default;
+
+@font-face {
+  font-family: 'Smart Zawgyi Pro';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$smart-zawgyi-pro-font-path}/SmartZawgyiPro.woff2') format('woff2'),
+    url('#{$smart-zawgyi-pro-font-path}/SmartZawgyiPro.woff') format('woff'),
+    url('#{$smart-zawgyi-pro-font-path}/SmartZawgyiPro.ttf') format('truetype');
+}

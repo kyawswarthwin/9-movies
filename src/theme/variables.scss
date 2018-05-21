@@ -29,6 +29,9 @@ $loading-md-spinner-color: #448aff;
 $refresher-icon-color: #448aff;
 $infinite-scroll-loading-color: #448aff;
 $tabs-md-tab-color-inactive: #8c8c8c;
+$font-family-ios-base: -apple-system, 'Helvetica Neue', 'Roboto', sans-serif, 'Smart Zawgyi Pro';
+$font-family-md-base: 'Roboto', 'Helvetica Neue', sans-serif, 'Smart Zawgyi Pro';
+$font-family-wp-base: 'Segoe UI', 'Noto Sans', sans-serif, 'Smart Zawgyi Pro';
 
 
 // Named Color Variables
@@ -92,6 +95,7 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+@import "smart-zawgyi-pro";
 
 
 // Plyr
