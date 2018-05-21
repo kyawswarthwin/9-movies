@@ -8,7 +8,10 @@ export class MusicProvider extends Parse.Object {
     super('Music');
   }
 
-  static load(params?: any, fields: any = ['title', 'artist', 'album']): Promise<MusicProvider[]> {
+  static load(
+    params?: any,
+    fields: any = ['title', 'artist', 'album', 'file']
+  ): Promise<MusicProvider[]> {
     return new Promise((resolve, reject) => {
       let query = new Parse.Query(this);
       if (params) {

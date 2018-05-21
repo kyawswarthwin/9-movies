@@ -23,42 +23,6 @@ export class SerieProvider extends Parse.Object {
         .catch(reject);
     });
   }
-
-  get file(): string {
-    return this.get('file');
-  }
-
-  get title(): string {
-    return this.get('title');
-  }
-
-  get artist(): string {
-    return this.get('artist');
-  }
-
-  get album(): string {
-    return this.get('album');
-  }
-
-  get year(): string {
-    return this.get('year');
-  }
-
-  get comment(): string {
-    return this.get('comment');
-  }
-
-  get track(): string {
-    return this.get('track');
-  }
-
-  get genre(): string {
-    return this.get('genre');
-  }
-
-  get picture(): Parse.File {
-    return this.get('picture');
-  }
 }
 
 Parse.Object.registerSubclass('Serie', SerieProvider);
