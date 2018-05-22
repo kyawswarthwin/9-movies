@@ -25,6 +25,7 @@ Source: "9-movies-x86.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags
 Source: "9-movies-x64.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion; Check: IsWin64; AfterInstall: SetElevationBit('{app}\{#MyAppExeName}')
 Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".env"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; AfterInstall: SetElevationBit('{group}\{#MyAppName}.lnk')
