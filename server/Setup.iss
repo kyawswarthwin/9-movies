@@ -28,8 +28,10 @@ Source: ".env"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; AfterInstall: SetElevationBit('{group}\{#MyAppName}.lnk')
+Name: "{group}\{#MyAppName} Dashboard"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; Parameters: "-d"; AfterInstall: SetElevationBit('{group}\{#MyAppName}.lnk')
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; Tasks: desktopicon; AfterInstall: SetElevationBit('{commondesktop}\{#MyAppName}.lnk')
+Name: "{commondesktop}\{#MyAppName} Dashboard"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; Parameters: "-d"; Tasks: desktopicon; AfterInstall: SetElevationBit('{commondesktop}\{#MyAppName}.lnk')
 
 [Dirs]
 Name: "C:\Media\Movies"
