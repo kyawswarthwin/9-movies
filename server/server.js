@@ -17,8 +17,8 @@ const port = process.env.PORT || 1337;
 
 const mountPath = process.env.PARSE_MOUNT || '/parse';
 const api = new ParseServer({
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || 'myMasterKey',
+  appId: process.env.APP_ID || '54C8D04B-D2B1-44C7-8431-51DF19320046',
+  masterKey: process.env.MASTER_KEY || '87649289-FF5C-4A31-9F81-8AFD0AC490F6',
   databaseURI: process.env.MONGO_URL || process.env.DATABASE_URL || 'mongodb://localhost:27017/dev',
   // Cloud Code
   serverURL: process.env.SERVER_URL || `http://localhost:${port}${mountPath}`,
