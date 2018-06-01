@@ -2,6 +2,36 @@
 
 const Serie = require('../../app/models/Serie');
 
+function serieLoad(request, response) {
+  let query = new Parse.Query(Serie);
+  query
+    .aggregate([
+      {
+        match: {
+          album: request.params.title
+        },
+        sort: {
+          comment: -1,
+          track: 1
+        },
+        group: {
+          objectId: `$comment`,
+          count: { $sum: 1 },
+          episodes: {
+            $push: {
+              id: '$_id',
+              file: '$file',
+              title: '$title',
+              track: '$track'
+            }
+          }
+        }
+      }
+    ])
+    .then(response.success)
+    .catch(response.error);
+}
+
 function serieListOf(request, response) {
   let query = new Parse.Query(Serie);
   let pipeline = [{}];
@@ -49,37 +79,7 @@ function serieListOf(request, response) {
     .catch(response.error);
 }
 
-function serieLoad(request, response) {
-  let query = new Parse.Query(Serie);
-  query
-    .aggregate([
-      {
-        match: {
-          album: request.params.title
-        },
-        sort: {
-          comment: -1,
-          track: 1
-        },
-        group: {
-          objectId: `$comment`,
-          count: { $sum: 1 },
-          episodes: {
-            $push: {
-              id: '$_id',
-              file: '$file',
-              title: '$title',
-              track: '$track'
-            }
-          }
-        }
-      }
-    ])
-    .then(response.success)
-    .catch(response.error);
-}
-
 module.exports = {
-  serieListOf: serieListOf,
-  serieLoad: serieLoad
+  serieLoad: serieLoad,
+  serieListOf: serieListOf
 };
