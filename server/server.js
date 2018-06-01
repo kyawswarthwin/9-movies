@@ -14,8 +14,8 @@ const parseServerRequest = require('./cloud/utils/request');
 
 const app = express();
 
-const host = process.env.HOST || 'localhost';
-const port = process.env.PORT || 1337;
+const host = process.env.HOST || '192.168.1.100';
+const port = process.env.PORT || 80;
 const mountPath = process.env.PARSE_MOUNT || '/parse';
 
 const appName = 'Parse Server Boilerplate';
