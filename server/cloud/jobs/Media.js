@@ -56,27 +56,27 @@ function watchMedia(request, status) {
 
 async function onMovie(event, file) {
   const filePath = path.join(mediaDir, file);
+  const query = new Parse.Query(Movie);
+  query.equalTo('file', file);
+  let data = await query.first();
   switch (event) {
     case 'add':
     case 'change':
       const movie = new Movie();
+      if (data) movie.id = data.id;
       movie.set('file', file);
-      let data = await metadata(filePath)
-        .then(data => {
-          delete data.album;
-          delete data.track;
-          data.picture = data.picture && new Parse.File('picture', { base64: data.picture });
-          return data;
+      let tags = await metadata(filePath)
+        .then(tags => {
+          delete tags.album;
+          delete tags.track;
+          tags.picture = tags.picture && new Parse.File('picture', { base64: tags.picture });
+          return tags;
         })
         .catch(console.error);
-      movie.save(data);
+      movie.save(tags);
       break;
     case 'unlink':
-      const query = new Parse.Query(Movie);
-      query.equalTo('file', file);
-      query.first().then(data => {
-        data.destroy();
-      });
+      if (data) data.destroy();
       break;
     default:
       break;
@@ -85,25 +85,25 @@ async function onMovie(event, file) {
 
 async function onSerie(event, file) {
   const filePath = path.join(mediaDir, file);
+  const query = new Parse.Query(Serie);
+  query.equalTo('file', file);
+  let data = await query.first();
   switch (event) {
     case 'add':
     case 'change':
       const serie = new Serie();
+      if (data) serie.id = data.id;
       serie.set('file', file);
-      let data = await metadata(filePath)
-        .then(data => {
-          data.picture = data.picture && new Parse.File('picture', { base64: data.picture });
-          return data;
+      let tags = await metadata(filePath)
+        .then(tags => {
+          tags.picture = tags.picture && new Parse.File('picture', { base64: tags.picture });
+          return tags;
         })
         .catch(console.error);
-      serie.save(data);
+      serie.save(tags);
       break;
     case 'unlink':
-      const query = new Parse.Query(Serie);
-      query.equalTo('file', file);
-      query.first().then(data => {
-        data.destroy();
-      });
+      if (data) data.destroy();
       break;
     default:
       break;
@@ -112,25 +112,25 @@ async function onSerie(event, file) {
 
 async function onMusic(event, file) {
   const filePath = path.join(mediaDir, file);
+  const query = new Parse.Query(Music);
+  query.equalTo('file', file);
+  let data = await query.first();
   switch (event) {
     case 'add':
     case 'change':
       const music = new Music();
+      if (data) music.id = data.id;
       music.set('file', file);
-      let data = await metadata(filePath)
-        .then(data => {
-          data.picture = data.picture && new Parse.File('picture', { base64: data.picture });
-          return data;
+      let tags = await metadata(filePath)
+        .then(tags => {
+          tags.picture = tags.picture && new Parse.File('picture', { base64: tags.picture });
+          return tags;
         })
         .catch(console.error);
-      music.save(data);
+      music.save(tags);
       break;
     case 'unlink':
-      const query = new Parse.Query(Music);
-      query.equalTo('file', file);
-      query.first().then(data => {
-        data.destroy();
-      });
+      if (data) data.destroy();
       break;
     default:
       break;
