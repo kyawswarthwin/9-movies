@@ -33,13 +33,13 @@
   <message-view *ngIf="isEmptyView" icon="bookmark" message="No Songs Found."></message-view>
   <ion-list *ngIf="isContentView">
     <button ion-item *ngFor="let song of songs; let i = index" navPush="AudioPlayerPage" [navParams]="params.by === 'album' ? { id: song.id, isAlbum: true } : { id: song.id, isAlbum: false }">
-      <ion-thumbnail *ngIf="params.field !== 'album'" item-start>
+      <ion-thumbnail *ngIf="params.by !== 'album'" item-start>
         <img [src]="song.picture ? song.picture.url() : 'assets/imgs/cover.png'">
       </ion-thumbnail>
       <h2>{{ song.title || song.file }}</h2>
-      <p *ngIf="params.field !== 'artist'">{{ song.artist }}</p>
-      <p *ngIf="params.field !== 'album'">{{ song.album }}</p>
-      <h2 *ngIf="params.field === 'album'" item-end>{{ song.track }}</h2>
+      <p *ngIf="params.by !== 'artist'">{{ song.artist }}</p>
+      <p *ngIf="params.by !== 'album'">{{ song.album }}</p>
+      <h2 *ngIf="params.by === 'album'" item-end>{{ song.track }}</h2>
     </button>
   </ion-list>
   <ion-infinite-scroll *ngIf="isContentView" (ionInfinite)="onLoadMore($event)">
