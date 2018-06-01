@@ -36,12 +36,20 @@ export class SerieProvider extends Parse.Object {
     return this.get('artist');
   }
 
+  get album(): string {
+    return this.get('album');
+  }
+
   get year(): string {
     return this.get('year');
   }
 
   get comment(): string {
     return this.get('comment');
+  }
+
+  get track(): string {
+    return this.get('track');
   }
 
   get genre(): string {
