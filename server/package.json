@@ -23,7 +23,6 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "chokidar": "^2.0.3",
-    "commander": "^2.15.1",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",

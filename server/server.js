@@ -1,27 +1,38 @@
 'use strict';
 
+require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const responseTime = require('response-time');
 const compression = require('compression');
 const cors = require('cors');
 const { ParseServer } = require('parse-server');
+const ParseDashboard = require('parse-dashboard');
 const path = require('path');
 
 const parseServerRequest = require('./cloud/utils/request');
 
 const app = express();
+
+const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 1337;
-
-// const appName = 'Parse Server Boilerplate';
-
 const mountPath = process.env.PARSE_MOUNT || '/parse';
+
+const appName = 'Parse Server Boilerplate';
+const appId = process.env.APP_ID || '54C8D04B-D2B1-44C7-8431-51DF19320046';
+const masterKey = process.env.MASTER_KEY || '87649289-FF5C-4A31-9F81-8AFD0AC490F6';
+const serverURL = process.env.SERVER_URL || `http://${host}:${port}${mountPath}`;
+
 const api = new ParseServer({
-  appId: process.env.APP_ID || '54C8D04B-D2B1-44C7-8431-51DF19320046',
-  masterKey: process.env.MASTER_KEY || '87649289-FF5C-4A31-9F81-8AFD0AC490F6',
-  databaseURI: process.env.MONGO_URL || process.env.DATABASE_URL || 'mongodb://localhost:27017/dev',
+  appId: appId,
+  masterKey: masterKey,
+  databaseURI:
+    process.env.MONGODB_URI ||
+    process.env.MONGO_URL ||
+    process.env.DATABASE_URL ||
+    'mongodb://localhost:27017/dev',
   // Cloud Code
-  serverURL: process.env.SERVER_URL || `http://localhost:${port}${mountPath}`,
+  serverURL: serverURL,
   cloud: path.join(__dirname, 'cloud/main.js'),
   // Live Queries
   liveQuery: {
@@ -37,7 +48,7 @@ const api = new ParseServer({
   // // Email Verification & Password Reset
   // verifyUserEmails: true,
   // appName: appName,
-  // publicServerURL: process.env.SERVER_URL || `http://localhost:${port}${mountPath}`,
+  // publicServerURL: serverURL,
   // emailAdapter: {
   //   module: '@parse/simple-mailgun-adapter',
   //   options: {
@@ -62,6 +73,24 @@ const api = new ParseServer({
   allowClientClassCreation: process.env.NODE_ENV === 'production' ? false : true
 });
 
+const dashboard = new ParseDashboard({
+  apps: [
+    {
+      appId: appId,
+      masterKey: masterKey,
+      serverURL: serverURL,
+      appName: appName
+    }
+  ],
+  trustProxy: 1,
+  users: [
+    {
+      user: process.env.PARSE_DASHBOARD_USER_ID || 'admin',
+      pass: process.env.PARSE_DASHBOARD_USER_PASSWORD || 'admin'
+    }
+  ]
+});
+
 const mediaDir = process.env.MEDIA_DIR || path.join(process.cwd(), 'media');
 
 app.use(responseTime());
@@ -69,6 +98,7 @@ app.use(compression());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mountPath, api);
+app.use('/dashboard', dashboard);
 app.use('/media', express.static(mediaDir));
 
 app.get('/download', async (req, res) => {
