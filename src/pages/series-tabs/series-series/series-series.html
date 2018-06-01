@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>TV Series</ion-title>
+    <ion-title>{{ params.value ? params.value : 'TV Series' }}</ion-title>
   </ion-navbar>
   <ion-toolbar no-border-top>
     <ion-searchbar [(ngModel)]="params.search" (keyup.enter)="onSearch()" (ionClear)="onClearSearch()"></ion-searchbar>
