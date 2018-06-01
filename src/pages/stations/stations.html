@@ -27,8 +27,8 @@
   <ion-refresher (ionRefresh)="onReload($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Stations."></message-view>
-  <message-view *ngIf="isEmptyView" icon="bookmark" message="No Stations Found."></message-view>
+  <message-view *ngIf="isErrorView" icon="wifi" message="No Connection Available"></message-view>
+  <message-view *ngIf="isEmptyView" icon="sad" message="No Data Found"></message-view>
   <ion-list *ngIf="isContentView">
     <button ion-item *ngFor="let station of stations" navPush="RadioPlayerPage" [navParams]="{ id: station.id }">
       {{ station.name }}

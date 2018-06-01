@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Application."></message-view>
-  <message-view *ngIf="isEmptyView" icon="bookmark" message="Application Not Found."></message-view>
+  <message-view *ngIf="isErrorView" icon="wifi" message="No Connection Available"></message-view>
+  <message-view *ngIf="isEmptyView" icon="sad" message="No Data Found"></message-view>
   <ion-card *ngIf="isContentView">
     <ion-card-header ion-item>
       <ion-thumbnail item-start>

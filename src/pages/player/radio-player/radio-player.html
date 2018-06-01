@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Station."></message-view>
-  <message-view *ngIf="isEmptyView" icon="bookmark" message="Station Not Found."></message-view>
+  <message-view *ngIf="isErrorView" icon="wifi" message="No Connection Available"></message-view>
+  <message-view *ngIf="isEmptyView" icon="sad" message="No Data Found"></message-view>
   <ion-grid [hidden]="!isContentView">
     <ion-row justify-content-center align-items-center>
       <ion-col text-center>

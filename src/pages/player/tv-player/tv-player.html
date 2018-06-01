@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <message-view *ngIf="isErrorView" icon="alert" message="Can't Load Channel."></message-view>
-  <message-view *ngIf="isEmptyView" icon="bookmark" message="Channel Not Found."></message-view>
+  <message-view *ngIf="isErrorView" icon="wifi" message="No Connection Available"></message-view>
+  <message-view *ngIf="isEmptyView" icon="sad" message="No Data Found"></message-view>
   <video [hidden]="!isContentView" controls crossorigin preload="none" #video></video>
 </ion-content>
