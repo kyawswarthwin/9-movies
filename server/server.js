@@ -18,7 +18,7 @@ const host = process.env.HOST || '192.168.1.100';
 const port = process.env.PORT || 80;
 const mountPath = process.env.PARSE_MOUNT || '/parse';
 
-const appName = 'Parse Server Boilerplate';
+const appName = '9 Movies';
 const appId = process.env.APP_ID || '54C8D04B-D2B1-44C7-8431-51DF19320046';
 const masterKey = process.env.MASTER_KEY || '87649289-FF5C-4A31-9F81-8AFD0AC490F6';
 const serverURL = process.env.SERVER_URL || `http://${host}:${port}${mountPath}`;
