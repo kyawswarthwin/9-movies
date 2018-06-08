@@ -9,13 +9,17 @@ console.log(generateSerialNumber(process.argv[2], KEY));
 
 function generateSerialNumber(uuid, key) {
   let sn = '';
-  let md5 = crypto
-    .createHash('md5')
-    .update(`${uuid};${key}`)
-    .digest('hex');
+  let md5 = hash(`${hash(uuid)}${hash(key)}`);
   for (let i = 0; i < 16; i++) {
     let char = parseInt(md5.substr(i * 2, 2), 16) % 32;
     sn += VALID_CHARS.substr(char, 1);
   }
   return sn;
+}
+
+function hash(data) {
+  return crypto
+    .createHash('md5')
+    .update(data)
+    .digest('hex');
 }

@@ -31,7 +31,7 @@ Source: "bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs creat
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; AfterInstall: SetElevationBit('{group}\{#MyAppName}.lnk')
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; Tasks: desktopicon; AfterInstall: SetElevationBit('{commondesktop}\{#MyAppName}.lnk')
-Name: "{userstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; AfterInstall: SetElevationBit('{userstartup}\{#MyAppName}.lnk')
+Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; AfterInstall: SetElevationBit('{commonstartup}\{#MyAppName}.lnk')
 
 [Dirs]
 Name: "C:\Media\Movies"
