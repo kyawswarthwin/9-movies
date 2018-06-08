@@ -37,7 +37,4 @@
       <ion-badge item-end>{{ album.count }}</ion-badge>
     </button>
   </ion-list>
-  <ion-infinite-scroll *ngIf="isContentView" (ionInfinite)="onLoadMore($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>

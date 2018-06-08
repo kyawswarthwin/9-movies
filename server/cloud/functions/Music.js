@@ -23,12 +23,6 @@ function musicListOf(request, response) {
       [`${sortBy}`]: direction
     };
   }
-  // Paginate
-  if (request.params.page >= 0) {
-    let limit = request.params.limit || 15;
-    pipeline[0]['limit'] = limit;
-    pipeline[0]['skip'] = request.params.page * limit;
-  }
   pipeline[0]['group'] = {
     objectId: `$${request.params.field}`,
     count: { $sum: 1 }

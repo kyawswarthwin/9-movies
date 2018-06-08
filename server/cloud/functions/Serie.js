@@ -59,12 +59,6 @@ function serieListOf(request, response) {
       [`${sortBy}`]: direction
     };
   }
-  // Paginate
-  if (request.params.page >= 0) {
-    let limit = request.params.limit || 15;
-    pipeline[pipeline.length - 1]['limit'] = limit;
-    pipeline[pipeline.length - 1]['skip'] = request.params.page * limit;
-  }
   pipeline[pipeline.length - 1]['group'] = {
     objectId: `$${request.params.field}`,
     year: { $first: '$year' },

@@ -52,17 +52,10 @@ export class MusicGenresPage extends BasePage {
     this.ionViewWillEnter();
   }
 
-  onLoadMore(infiniteScroll: any) {
-    this.infiniteScroll = infiniteScroll;
-    this.params.page++;
-    this.loadData();
-  }
-
   onReload(refresher?: any) {
     this.refresher = refresher;
 
     this.params.sortBy = `${this.direction}${this.column}`;
-    this.params.page = 0;
     this.genres = [];
 
     this.loadData();
