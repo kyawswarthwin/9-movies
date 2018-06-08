@@ -7,14 +7,17 @@ const chalk = require('chalk');
 const readline = require('readline');
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require('bcrypt');
 
 const VALID_CHARS = '0123456789ABCDEFGHJKLMNPQRTUVWXY';
-const KEY = '2EFD24F3-A9AD-4D3B-A981-1C87B7347411';
+const KEY = 'C6944266-693B-4F2B-B4F1-ACA2A9F24A4E';
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+
+const saltRounds = 10;
 
 let deviceId;
 
@@ -60,7 +63,7 @@ function generateSerialNumber(uuid, key) {
   let sn = '';
   let md5 = crypto
     .createHash('md5')
-    .update(`${uuid};${key}`)
+    .update(`${bcrypt.hashSync(uuid, saltRounds)}${bcrypt.hashSync(key, saltRounds)}`)
     .digest('hex');
   for (let i = 0; i < 16; i++) {
     let char = parseInt(md5.substr(i * 2, 2), 16) % 32;

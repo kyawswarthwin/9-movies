@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kyawswarthwin/parse-server-boilerplate#readme",
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "chalk": "^2.4.1",
     "chokidar": "^2.0.3",
     "compression": "^1.7.2",
@@ -30,9 +31,9 @@
     "easy-metadata": "^1.0.2",
     "express": "^4.16.3",
     "parse-dashboard": "^1.2.0",
-    "parse-server": "^2.7.4",
+    "parse-server": "^2.8.2",
     "response-time": "^2.3.2",
-    "systeminformation": "^3.41.3",
+    "systeminformation": "^3.42.0",
     "url-join": "^4.0.0"
   },
   "bin": "app.js",

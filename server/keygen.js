@@ -3,9 +3,9 @@
 const crypto = require('crypto');
 
 const VALID_CHARS = '0123456789ABCDEFGHJKLMNPQRTUVWXY';
-const KEY = '2EFD24F3-A9AD-4D3B-A981-1C87B7347411';
+const KEY = 'C6944266-693B-4F2B-B4F1-ACA2A9F24A4E';
 
-console.log(generateSerialNumber('19A1237B-A889-11E6-454D-90CF72F727CD', KEY));
+console.log(generateSerialNumber(process.argv[2], KEY));
 
 function generateSerialNumber(uuid, key) {
   let sn = '';
