@@ -15,7 +15,7 @@ export class MusicGenresPage extends BasePage {
   params: any = { field: 'genre' };
   genres: any[];
   column: string = 'genre';
-  direction: string = '';
+  direction: string = '1';
 
   constructor(public injector: Injector) {
     super(injector);
@@ -55,7 +55,7 @@ export class MusicGenresPage extends BasePage {
   onReload(refresher?: any) {
     this.refresher = refresher;
 
-    this.params.sortBy = `${this.direction}${this.column}`;
+    this.params.sort = this.direction;
     this.genres = [];
 
     this.loadData();

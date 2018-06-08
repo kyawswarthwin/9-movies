@@ -35,7 +35,6 @@ function serieLoad(request, response) {
 function serieListOf(request, response) {
   let query = new Parse.Query(Serie);
   let pipeline = [{}];
-  let direction = -1;
   // Series By
   if (request.params.by) {
     pipeline[0]['match'] = {
@@ -48,17 +47,6 @@ function serieListOf(request, response) {
       [`${request.params.field}`]: { $regex: request.params.search }
     };
   }
-  // Sort
-  if (request.params.sortBy) {
-    let sortBy = request.params.sortBy;
-    if (sortBy.charAt(0) === '-') {
-      sortBy = sortBy.substr(1);
-      direction = 1;
-    }
-    pipeline[pipeline.length - 1]['sort'] = {
-      [`${sortBy}`]: direction
-    };
-  }
   pipeline[pipeline.length - 1]['group'] = {
     objectId: `$${request.params.field}`,
     year: { $first: '$year' },
@@ -66,6 +54,12 @@ function serieListOf(request, response) {
   };
   if (request.params.field === 'album') {
     pipeline[pipeline.length - 1]['group']['picture'] = { $first: '$picture' };
+  }
+  // Sort
+  if (request.params.sort) {
+    pipeline[pipeline.length - 1]['sort'] = {
+      _id: Number(request.params.sort)
+    };
   }
   query
     .aggregate(pipeline)

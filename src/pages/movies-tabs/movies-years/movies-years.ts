@@ -15,7 +15,7 @@ export class MoviesYearsPage extends BasePage {
   params: any = { field: 'year' };
   years: any[];
   column: string = 'year';
-  direction: string = '';
+  direction: string = '1';
 
   constructor(public injector: Injector) {
     super(injector);
@@ -55,7 +55,7 @@ export class MoviesYearsPage extends BasePage {
   onReload(refresher?: any) {
     this.refresher = refresher;
 
-    this.params.sortBy = `${this.direction}${this.column}`;
+    this.params.sort = this.direction;
     this.years = [];
 
     this.loadData();

@@ -5,22 +5,10 @@ const Music = require('../../app/models/Music');
 function musicListOf(request, response) {
   let query = new Parse.Query(Music);
   let pipeline = [{}];
-  let direction = -1;
   // Search
   if (request.params.search) {
     pipeline[0]['match'] = {
       [`${request.params.field}`]: { $regex: request.params.search }
-    };
-  }
-  // Sort
-  if (request.params.sortBy) {
-    let sortBy = request.params.sortBy;
-    if (sortBy.charAt(0) === '-') {
-      sortBy = sortBy.substr(1);
-      direction = 1;
-    }
-    pipeline[0]['sort'] = {
-      [`${sortBy}`]: direction
     };
   }
   pipeline[0]['group'] = {
@@ -29,6 +17,12 @@ function musicListOf(request, response) {
   };
   if (request.params.field === 'album') {
     pipeline[0]['group']['picture'] = { $first: '$picture' };
+  }
+  // Sort
+  if (request.params.sort) {
+    pipeline[0]['sort'] = {
+      _id: Number(request.params.sort)
+    };
   }
   query
     .aggregate(pipeline)
