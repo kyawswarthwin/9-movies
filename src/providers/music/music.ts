@@ -27,7 +27,7 @@ export class MusicProvider extends Parse.Object {
             queries[index] = new Parse.Query(this);
             queries[index].contains(field, params.search);
           });
-          query = Parse.Query.or(...queries);
+          query = Parse.Query.and(query, Parse.Query.or(...queries));
         }
         // Sort
         if (params.sortBy) {
