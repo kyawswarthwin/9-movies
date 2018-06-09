@@ -16,6 +16,14 @@ export class SerieProvider extends Parse.Object {
     });
   }
 
+  static detail(params: any): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      Parse.Cloud.run('serieDetail', params)
+        .then(resolve)
+        .catch(reject);
+    });
+  }
+
   static listOf(params?: any): Promise<any[]> {
     return new Promise((resolve, reject) => {
       Parse.Cloud.run('serieListOf', params)

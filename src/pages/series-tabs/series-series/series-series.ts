@@ -14,8 +14,8 @@ import { SerieProvider as Serie } from '../../../providers/serie/serie';
 export class SeriesSeriesPage extends BasePage {
   params: any = { field: 'album' };
   series: any[];
-  column: string = 'album';
-  direction: string = '';
+  column: string = 'updatedAt';
+  direction: string = '-';
 
   constructor(public injector: Injector) {
     super(injector);
@@ -38,7 +38,7 @@ export class SeriesSeriesPage extends BasePage {
 
   async loadData() {
     try {
-      let data = await Serie.listOf(this.params);
+      let data = await Serie.load(this.params);
       this.series = this.series.concat(data);
       this.onRefreshComplete(data);
       if (this.series.length) {
