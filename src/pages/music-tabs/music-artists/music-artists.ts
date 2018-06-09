@@ -21,7 +21,7 @@ export class MusicArtistsPage extends BasePage {
     super(injector);
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this.showLoadingView('Loading...');
     this.onReload();
   }
@@ -49,7 +49,7 @@ export class MusicArtistsPage extends BasePage {
 
   onClearSearch() {
     this.params.search = '';
-    this.ionViewWillEnter();
+    this.ionViewDidLoad();
   }
 
   onReload(refresher?: any) {

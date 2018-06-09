@@ -31,7 +31,7 @@ export class SeriesSeriesPage extends BasePage {
     }
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this.showLoadingView('Loading...');
     this.onReload();
   }
@@ -59,7 +59,7 @@ export class SeriesSeriesPage extends BasePage {
 
   onClearSearch() {
     this.params.search = '';
-    this.ionViewWillEnter();
+    this.ionViewDidLoad();
   }
 
   onLoadMore(infiniteScroll: any) {

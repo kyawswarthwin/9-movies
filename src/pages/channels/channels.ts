@@ -21,7 +21,7 @@ export class ChannelsPage extends BasePage {
     super(injector);
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this.showLoadingView('Loading...');
     this.onReload();
   }
@@ -49,7 +49,7 @@ export class ChannelsPage extends BasePage {
 
   onClearSearch() {
     this.params.search = '';
-    this.ionViewWillEnter();
+    this.ionViewDidLoad();
   }
 
   onLoadMore(infiniteScroll: any) {
