@@ -34,13 +34,48 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFil
 Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"; AfterInstall: SetElevationBit('{commonstartup}\{#MyAppName}.lnk')
 
 [Dirs]
-Name: "C:\Media\Movies"
-Name: "C:\Media\Series"
-Name: "C:\Media\Music"
-Name: "C:\Media\Applications"
-Name: "C:\Media\Games"
+Name: "{code:GetMediaDir}\Movies"; Flags: uninsneveruninstall
+Name: "{code:GetMediaDir}\Series"; Flags: uninsneveruninstall
+Name: "{code:GetMediaDir}\Music"; Flags: uninsneveruninstall
+Name: "{code:GetMediaDir}\Applications"; Flags: uninsneveruninstall
+Name: "{code:GetMediaDir}\Games"; Flags: uninsneveruninstall
+
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}"
 
 [Code]
+var
+  MediaDirPage: TInputDirWizardPage;
+
+procedure InitializeWizard();
+begin
+  MediaDirPage := CreateInputDirPage(wpSelectDir,
+    'Select Media Location', 'Where should media files be stored?',
+    'Media files will be stored in the following folder.'#13#10#13#10 +
+    'To continue, click Next. If you would like to select a different folder, click Browse.',
+    False, '');
+  MediaDirPage.Add('');
+  MediaDirPage.Values[0] := GetPreviousData('MediaDir', 'C:\Media');
+end;
+
+procedure RegisterPreviousData(PreviousDataKey: Integer);
+begin
+  SetPreviousData(PreviousDataKey, 'MediaDir', MediaDirPage.Values[0]);
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep = ssPostInstall then
+  begin
+    SaveStringToFile(ExpandConstant('{app}\.env'), 'MEDIA_DIR=' + MediaDirPage.Values[0], True);
+  end;
+end;
+
+function GetMediaDir(Param: String): String;
+begin
+  Result := MediaDirPage.Values[0];
+end;
+
 procedure SetElevationBit(Filename: string);
 var
   Buffer: string;
