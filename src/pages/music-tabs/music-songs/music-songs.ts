@@ -15,7 +15,7 @@ export class MusicSongsPage extends BasePage {
   params: any = {};
   songs: Music[];
   column: string = 'updatedAt';
-  direction: string = '';
+  direction: string = '-';
 
   constructor(public injector: Injector) {
     super(injector);

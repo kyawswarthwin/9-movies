@@ -15,7 +15,7 @@ export class GamesPage extends BasePage {
   params: any = {};
   games: Game[];
   column: string = 'updatedAt';
-  direction: string = '';
+  direction: string = '-';
 
   constructor(public injector: Injector) {
     super(injector);

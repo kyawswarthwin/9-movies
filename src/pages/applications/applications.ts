@@ -15,7 +15,7 @@ export class ApplicationsPage extends BasePage {
   params: any = {};
   applications: Application[];
   column: string = 'updatedAt';
-  direction: string = '';
+  direction: string = '-';
 
   constructor(public injector: Injector) {
     super(injector);

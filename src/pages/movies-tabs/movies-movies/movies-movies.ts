@@ -15,7 +15,7 @@ export class MoviesMoviesPage extends BasePage {
   params: any = {};
   movies: Movie[];
   column: string = 'updatedAt';
-  direction: string = '';
+  direction: string = '-';
 
   constructor(public injector: Injector) {
     super(injector);
