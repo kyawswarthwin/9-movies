@@ -67,7 +67,7 @@ procedure CurStepChanged(CurStep: TSetupStep);
 begin
   if CurStep = ssPostInstall then
   begin
-    SaveStringToFile(ExpandConstant('{app}\.env'), 'MEDIA_DIR=' + MediaDirPage.Values[0], True);
+    SaveStringToFile(ExpandConstant('{app}\.env'), 'MEDIA_DIR=' + MediaDirPage.Values[0] + #13#10, True);
   end;
 end;
 
