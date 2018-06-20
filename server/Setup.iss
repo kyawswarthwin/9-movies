@@ -1,6 +1,6 @@
-#define MyAppName "9 Movies"
+#define MyAppName "Royal Movies"
 #define MyAppVersion "1.0.0"
-#define MyAppExeName "9-movies.exe"
+#define MyAppExeName "royal-movies.exe"
 
 [Setup]
 AppId={{E2F27654-6FEC-4798-B2D1-769A6D7148DE}
@@ -21,8 +21,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
-Source: "9-movies-x86.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion; Check: not IsWin64; AfterInstall: SetElevationBit('{app}\{#MyAppExeName}')
-Source: "9-movies-x64.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion; Check: IsWin64; AfterInstall: SetElevationBit('{app}\{#MyAppExeName}')
+Source: "royal-movies-x86.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion; Check: not IsWin64; AfterInstall: SetElevationBit('{app}\{#MyAppExeName}')
+Source: "royal-movies-x64.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion; Check: IsWin64; AfterInstall: SetElevationBit('{app}\{#MyAppExeName}')
 Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".env"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs

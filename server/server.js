@@ -18,7 +18,7 @@ const host = process.env.HOST || '192.168.1.100';
 const port = process.env.PORT || 80;
 const mountPath = process.env.PARSE_MOUNT || '/parse';
 
-const appName = '9 Movies';
+const appName = 'Royal Movies';
 const appId = process.env.APP_ID || '8984ec78-bf10-443c-9b21-d9a693f5f9a1';
 const masterKey = process.env.MASTER_KEY || 'f623d772-c883-40e7-9e4f-6b6ee4ee69ba';
 const serverURL = process.env.SERVER_URL || `http://${host}:${port}${mountPath}`;
